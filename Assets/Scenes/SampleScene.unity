@@ -239,16 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _width: 3
   _height: 3
-  _tile: {fileID: 3018046005572126341, guid: 6fcc0d716097a5045946a006bff9b7ce, type: 3}
-  _characters:
-  - {fileID: 1452915185, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -1201717103, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: 876255467, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -1239714505, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -833048915, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -2034999998, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -833048915, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: 1178494172, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
+  _cell: {fileID: 3018046005572126341, guid: 6fcc0d716097a5045946a006bff9b7ce, type: 3}
+  _tile: {fileID: 6037974304094162530, guid: 74e754cf8067938428516e1aef86a9b3, type: 3}
 --- !u!4 &1440767623
 Transform:
   m_ObjectHideFlags: 0
