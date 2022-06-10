@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour
@@ -13,14 +14,11 @@ public class BoardManager : MonoBehaviour
     private GameObject _cell;
 
     [SerializeField]
-    private GameObject _tile;
-
-    [SerializeField]
     private float _repeatRate = 2.0f;
 
-    private readonly List<GameObject> FullTiles = new List<GameObject>();
+    private readonly List<TileElement> _fullTiles = new List<TileElement>();
 
-    private readonly List<GameObject> EmptyTiles = new List<GameObject>();
+    private readonly List<TileElement> _emptyTiles = new List<TileElement>();
 
     public static BoardManager Instance { get; private set; }
 
@@ -44,30 +42,36 @@ public class BoardManager : MonoBehaviour
         {
             for (var j = 0; j < _height; j++)
             {
-                var tile = Instantiate(_cell, new Vector3(startX + offsetX * i, startY + offsetY * j, 0), _tile.transform.rotation);
+                var tile = Instantiate(_cell, new Vector3(startX + offsetX * i, startY + offsetY * j, 0), _cell.transform.rotation);
                 tile.transform.parent = transform;
-                EmptyTiles.Add(tile);
+                var tileElement = tile.GetComponentInChildren<TileElement>();
+                tileElement.Hide();               
+                _emptyTiles.Add(tileElement);
             }
         }
     }
 
     private void CreateNewTile()
     {
-        if (EmptyTiles.Count == 0)
+        if (_emptyTiles.Count == 0)
         {
             Debug.Log("Game Ended!");
         }
         else
         {
-            var tileElement = EmptyTiles[Random.Range(0, EmptyTiles.Count)];
-            var tile = Instantiate(
-                _tile,
-                tileElement.transform.position,
-                tileElement.transform.rotation,
-                tileElement.transform);
+            var tileElement = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
+            tileElement.Show();
 
-            FullTiles.Add(tileElement);
-            EmptyTiles.Remove(tileElement);
+            _fullTiles.Add(tileElement);
+            _emptyTiles.Remove(tileElement);
         }
+    }
+
+    public void OnMerge(TileElement tileElement)
+    {
+        var tile = _fullTiles.Find(x => x == tileElement);
+        _emptyTiles.Add(tile);
+        _fullTiles.Remove(tile);
+        tileElement.gameObject.SetActive(false);
     }
 }
