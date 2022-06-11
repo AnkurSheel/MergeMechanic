@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\TileElement.cs" />
+     <Compile Include="Assets\Scripts\Board.cs" />
      <Compile Include="Assets\Scripts\BoardManager.cs" />
      <Reference Include="UnityEngine">
      <HintPath>D:\Software\Unity\2021.3.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

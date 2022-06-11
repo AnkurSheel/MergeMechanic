@@ -1,57 +1,37 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class BoardManager : MonoBehaviour
+public class BoardManager
 {
-    [SerializeField]
-    private int _width = 3;
-
-    [SerializeField]
-    private int _height = 3;
-
-    [SerializeField]
-    private GameObject _cell;
-
-    [SerializeField]
-    private float _repeatRate = 2.0f;
-
     private readonly List<TileElement> _fullTiles = new List<TileElement>();
 
     private readonly List<TileElement> _emptyTiles = new List<TileElement>();
 
-    public static BoardManager Instance { get; private set; }
+    private static BoardManager _instance;
 
-    // Use this for initialization
-    private void Start()
+    public static BoardManager Instance => _instance ?? (_instance = new BoardManager());
+
+    public void CreateBoard(
+        int width,
+        int height,
+        Vector3 startPosition,
+        Vector3 tileSize,
+        Func<Vector3, TileElement> instantiateGameObjectFunc)
     {
-        Instance = GetComponent<BoardManager>();
-
-        Vector2 offset = _cell.GetComponent<SpriteRenderer>().bounds.size;
-        CreateBoard(offset.x, offset.y);
-
-        InvokeRepeating(nameof(CreateNewTile), 0.0f, _repeatRate);
-    }
-
-    private void CreateBoard(float offsetX, float offsetY)
-    {
-        var startX = transform.position.x;
-        var startY = transform.position.y;
-
-        for (var i = 0; i < _width; i++)
+        for (var i = 0; i < width; i++)
         {
-            for (var j = 0; j < _height; j++)
+            for (var j = 0; j < height; j++)
             {
-                var tile = Instantiate(_cell, new Vector3(startX + offsetX * i, startY + offsetY * j, 0), _cell.transform.rotation);
-                tile.transform.parent = transform;
-                var tileElement = tile.GetComponentInChildren<TileElement>();
-                tileElement.Hide();               
+                var tileElement = instantiateGameObjectFunc(new Vector3(startPosition.x + tileSize.x * i, startPosition.y + tileSize.y * j, 0));
+                tileElement.Hide();
                 _emptyTiles.Add(tileElement);
             }
         }
     }
 
-    private void CreateNewTile()
+    public void CreateNewTile()
     {
         if (_emptyTiles.Count == 0)
         {
