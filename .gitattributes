@@ -130,6 +130,7 @@
 *.so lfs-file
 
 # Packaging
+*.br lfs-file
 *.zip lfs-file
 *.7z lfs-file
 *.gz lfs-file
