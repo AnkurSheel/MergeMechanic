@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoBehaviours", "MonoBehav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core.csproj", "{cb1814f6-12ce-d306-825e-2bed48bb7078}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{201052e4-edb0-7929-21f0-e7234106ed14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,8 @@ Global
 		{07c0e12a-5083-7495-44da-e41c61a46b43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{cb1814f6-12ce-d306-825e-2bed48bb7078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{cb1814f6-12ce-d306-825e-2bed48bb7078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{201052e4-edb0-7929-21f0-e7234106ed14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{201052e4-edb0-7929-21f0-e7234106ed14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
