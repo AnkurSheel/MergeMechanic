@@ -29,12 +29,12 @@ namespace MergeMechanic
             InvokeRepeating(nameof(CreateNewTile), 0.0f, _repeatRate);
         }
 
-        private TileElementMonoBehaviour InstantiateGameObjectFunc(Vector3 position)
+        private TileElement InstantiateGameObjectFunc(Vector3 position)
         {
             var tile = Instantiate(_cell, position, _cell.transform.rotation);
             tile.transform.parent = transform;
             var tileElement = tile.GetComponentInChildren<TileElementMonoBehaviour>();
-            return tileElement;
+            return tileElement.TileElement;
         }
 
         public void CreateNewTile()

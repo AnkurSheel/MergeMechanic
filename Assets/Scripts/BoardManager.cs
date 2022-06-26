@@ -7,9 +7,9 @@ namespace MergeMechanic
 {
     public class BoardManager
     {
-        private readonly List<TileElementMonoBehaviour> _fullTiles = new List<TileElementMonoBehaviour>();
+        private readonly List<TileElement> _fullTiles = new List<TileElement>();
 
-        private readonly List<TileElementMonoBehaviour> _emptyTiles = new List<TileElementMonoBehaviour>();
+        private readonly List<TileElement> _emptyTiles = new List<TileElement>();
 
         private static BoardManager _instance;
 
@@ -20,7 +20,7 @@ namespace MergeMechanic
             int height,
             Vector3 startPosition,
             Vector3 tileSize,
-            Func<Vector3, TileElementMonoBehaviour> instantiateGameObjectFunc)
+            Func<Vector3, TileElement> instantiateGameObjectFunc)
         {
             for (var i = 0; i < width; i++)
             {
@@ -49,12 +49,11 @@ namespace MergeMechanic
             }
         }
 
-        public void OnMerge(TileElementMonoBehaviour tileElement)
+        public void OnMerge(TileElement tileElement)
         {
             var tile = _fullTiles.Find(x => x == tileElement);
             _emptyTiles.Add(tile);
             _fullTiles.Remove(tile);
-            tileElement.gameObject.SetActive(false);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MergeMechanic
         private Camera _camera;
         private TileElementMonoBehaviour _triggered;
 
-        private int _level;
+        public TileElement TileElement { get; private set; }
 
         private void Awake()
         {
@@ -23,7 +23,17 @@ namespace MergeMechanic
             _spriteRenderer = GetComponent<SpriteRenderer>();
             var newSprite = _shapes[0];
             _spriteRenderer.sprite = newSprite;
-            _level = 1;
+            TileElement = new TileElement(gameObject);
+        }
+
+        private void OnEnable()
+        {
+            _spriteRenderer.sprite = _shapes[0];
+        }
+
+        private void OnDisable()
+        {
+            _spriteRenderer.sprite = null;
         }
 
         private void Update()
@@ -46,30 +56,22 @@ namespace MergeMechanic
 
             gameObject.transform.localPosition = Vector3.zero;
 
-            if (_collided && _triggered._level == _level)
+            if (_collided)
             {
-                _triggered.IncrementLevel();
-                _level = 1;
-                BoardManager.Instance.OnMerge(this);
+                TileElement.OnMerge(_triggered.TileElement, level => _triggered._spriteRenderer.sprite = _shapes[level]);
             }
         }
 
-        private void IncrementLevel()
-        {
-            _spriteRenderer.sprite = _shapes[_level];
-            _level++;
-        }
-
-        private void OnTriggerStay2D(Collider2D col)
+        private void OnTriggerStay2D(Collider2D collider)
         {
             if (_collided)
             {
                 return;
             }
 
-            var tileElement = col.gameObject.GetComponent<TileElementMonoBehaviour>();
+            var tileElement = collider.gameObject.GetComponent<TileElementMonoBehaviour>();
 
-            if (tileElement)
+            if (tileElement != null)
             {
                 _triggered = tileElement;
                 _collided = true;
@@ -80,18 +82,6 @@ namespace MergeMechanic
         {
             _triggered = null;
             _collided = false;
-        }
-
-        public void Show()
-        {
-            _spriteRenderer.sprite = _shapes[0];
-            gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            _spriteRenderer.sprite = null;
-            gameObject.SetActive(false);
         }
     }
 }
