@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using MergeMechanic.Core;
 using UnityEngine;
 
-namespace MergeMechanic
+namespace MergeMechanic.MonoBehaviours
 {
     public class TileElementMonoBehaviour : MonoBehaviour
     {

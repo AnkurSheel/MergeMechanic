@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using MergeMechanic.Core;
+using UnityEngine;
 
-namespace MergeMechanic
+namespace MergeMechanic.MonoBehaviours
 {
     public class BoardMonoBehaviour : MonoBehaviour
     {

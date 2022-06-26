@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace MergeMechanic
+namespace MergeMechanic.Core
 {
     public class BoardManager
     {
