@@ -14,9 +14,10 @@ namespace MergeMechanic.MonoBehaviours
         private bool _selected;
         private bool _collided;
         private Camera _camera;
+        
         private TileElementMonoBehaviour _triggered;
 
-        public TileElement TileElement { get; private set; }
+        public ITileElement TileElement { get; private set; }
 
         private void Awake()
         {

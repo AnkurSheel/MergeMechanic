@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MergeMechanic.Core
 {
-    public class TileElement
+    public class TileElement : ITileElement
     {
         private bool _selected;
         private bool _collided;
@@ -18,7 +18,7 @@ namespace MergeMechanic.Core
             Level = 1;
         }
 
-        public void OnMerge(TileElement triggeredTile, Action<int> onMergeFunc)
+        public void OnMerge(ITileElement triggeredTile, Action<int> onMergeFunc)
         {
             if (triggeredTile.Level == Level)
             {

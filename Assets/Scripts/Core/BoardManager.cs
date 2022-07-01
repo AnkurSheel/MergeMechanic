@@ -7,11 +7,11 @@ namespace MergeMechanic.Core
 {
     public class BoardManager
     {
-        private readonly List<TileElement> _fullTiles = new List<TileElement>();
+        private readonly List<ITileElement> _fullTiles = new List<ITileElement>();
 
-        private readonly List<TileElement> _emptyTiles = new List<TileElement>();
+        private readonly List<ITileElement> _emptyTiles = new List<ITileElement>();
 
-        private static BoardManager _instance;
+        private static BoardManager? _instance;
 
         public static BoardManager Instance => _instance ?? (_instance = new BoardManager());
 
@@ -49,7 +49,7 @@ namespace MergeMechanic.Core
             }
         }
 
-        public void OnMerge(TileElement tileElement)
+        public void OnMerge(ITileElement tileElement)
         {
             var tile = _fullTiles.Find(x => x == tileElement);
             _emptyTiles.Add(tile);
