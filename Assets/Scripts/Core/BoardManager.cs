@@ -1,59 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace MergeMechanic.Core
 {
-    public class BoardManager
+    public class BoardManager : IBoardManager
     {
-        private readonly List<ITileElement> _fullTiles = new List<ITileElement>();
+        private readonly IGridHelper _gridHelper;
 
-        private readonly List<ITileElement> _emptyTiles = new List<ITileElement>();
+        private readonly IGameObjectWrapper _gameObjectWrapper;
+        private readonly ITileTracker _tileTracker;
 
-        private static BoardManager? _instance;
-
-        public static BoardManager Instance => _instance ?? (_instance = new BoardManager());
+        public BoardManager(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
+        {
+            _gridHelper = gridHelper;
+            _gameObjectWrapper = gameObjectWrapper;
+            _tileTracker = tileTracker;
+        }
 
         public void CreateBoard(
             int width,
             int height,
-            Vector3 startPosition,
             Vector3 tileSize,
-            Func<Vector3, TileElement> instantiateGameObjectFunc)
+            Transform parentTransform,
+            GameObject cell,
+            Func<GameObject, ITileElement> getTileElement)
         {
-            for (var i = 0; i < width; i++)
+            for (var column = 0; column < width; column++)
             {
-                for (var j = 0; j < height; j++)
+                for (var row = 0; row < height; row++)
                 {
-                    var tileElement = instantiateGameObjectFunc(new Vector3(startPosition.x + tileSize.x * i, startPosition.y + tileSize.y * j, 0));
+                    var position = _gridHelper.GetTilePosition(
+                        parentTransform.position,
+                        tileSize,
+                        column,
+                        row);
+
+                    var tile = _gameObjectWrapper.Instantiate(cell, position, parentTransform);
+
+                    var tileElement = getTileElement(tile);
+
                     tileElement.Hide();
-                    _emptyTiles.Add(tileElement);
+                    _tileTracker.OnTileCreated(tileElement);
                 }
             }
         }
 
-        public void CreateNewTile()
+        public void PopulateTile()
         {
-            if (_emptyTiles.Count == 0)
+            if (!TileTracker.Instance.HasEmptyTile)
             {
                 Debug.Log("Game Ended!");
             }
             else
             {
-                var tileElement = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
+                var tileElement = _tileTracker.PopulateRandomTile();
                 tileElement.Show();
-
-                _fullTiles.Add(tileElement);
-                _emptyTiles.Remove(tileElement);
             }
-        }
-
-        public void OnMerge(ITileElement tileElement)
-        {
-            var tile = _fullTiles.Find(x => x == tileElement);
-            _emptyTiles.Add(tile);
-            _fullTiles.Remove(tile);
         }
     }
 }

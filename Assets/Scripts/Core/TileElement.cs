@@ -24,7 +24,7 @@ namespace MergeMechanic.Core
             {
                 triggeredTile.IncrementLevel(onMergeFunc);
                 Level = 1;
-                BoardManager.Instance.OnMerge(this);
+                TileTracker.Instance.OnMerge(this);
                 _gameObject.SetActive(false);
             }
         }

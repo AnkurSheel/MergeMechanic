@@ -17,30 +17,36 @@ namespace MergeMechanic.MonoBehaviours
         [SerializeField]
         private float _repeatRate = 2.0f;
 
+        private IBoardManager _boardManager;
+
+        private void Awake()
+        {
+            _boardManager = new BoardManager(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance);
+        }
+
         private void Start()
         {
             var spriteSize = _cell.GetComponent<SpriteRenderer>().bounds.size;
-            BoardManager.Instance.CreateBoard(
+            _boardManager.CreateBoard(
                 _width,
                 _height,
-                transform.position,
                 spriteSize,
-                InstantiateGameObjectFunc);
+                transform,
+                _cell,
+                GetTileElement);
 
-            InvokeRepeating(nameof(CreateNewTile), 0.0f, _repeatRate);
+            InvokeRepeating(nameof(PopulateTile), 0.0f, _repeatRate);
         }
 
-        private TileElement InstantiateGameObjectFunc(Vector3 position)
+        private ITileElement GetTileElement(GameObject tile)
         {
-            var tile = Instantiate(_cell, position, _cell.transform.rotation);
-            tile.transform.parent = transform;
             var tileElement = tile.GetComponentInChildren<TileElementMonoBehaviour>();
             return tileElement.TileElement;
         }
 
-        public void CreateNewTile()
+        public void PopulateTile()
         {
-            BoardManager.Instance.CreateNewTile();
+            _boardManager.PopulateTile();
         }
     }
 }
