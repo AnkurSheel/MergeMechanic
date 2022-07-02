@@ -13,5 +13,7 @@ namespace MergeMechanic.Core
         int Level { get; }
 
         void IncrementLevel(Action<int> instantiateGameObjectFunc);
+
+        void ResetLocalPosition();
     }
 }

@@ -10,5 +10,15 @@ namespace MergeMechanic.Core
             gameObject.transform.parent = parent;
             return gameObject;
         }
+
+        public void SetActive(GameObject gameObject, bool value)
+        {
+            gameObject.SetActive(value);
+        }
+
+        public void ResetLocalPosition(GameObject gameObject)
+        {
+            gameObject.transform.localPosition = Vector3.zero;
+        }
     }
 }

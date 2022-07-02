@@ -11,10 +11,12 @@ namespace MergeMechanic.Core
         public int Level { get; private set; }
 
         private readonly GameObject _gameObject;
+        private readonly IGameObjectWrapper _gameObjectWrapper;
 
-        public TileElement(GameObject gameObject)
+        public TileElement(GameObject gameObject, IGameObjectWrapper gameObjectWrapper)
         {
             _gameObject = gameObject;
+            _gameObjectWrapper = gameObjectWrapper;
             Level = 1;
         }
 
@@ -25,7 +27,7 @@ namespace MergeMechanic.Core
                 triggeredTile.IncrementLevel(onMergeFunc);
                 Level = 1;
                 TileTracker.Instance.OnMerge(this);
-                _gameObject.SetActive(false);
+                _gameObjectWrapper.SetActive(_gameObject, false);
             }
         }
 
@@ -35,14 +37,19 @@ namespace MergeMechanic.Core
             Level++;
         }
 
+        public void ResetLocalPosition()
+        {
+            _gameObjectWrapper.ResetLocalPosition(_gameObject);
+        }
+
         public void Show()
         {
-            _gameObject.SetActive(true);
+            _gameObjectWrapper.SetActive(_gameObject, true);
         }
 
         public void Hide()
         {
-            _gameObject.SetActive(false);
+            _gameObjectWrapper.SetActive(_gameObject, false);
         }
     }
 }

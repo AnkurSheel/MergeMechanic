@@ -12,10 +12,9 @@ namespace MergeMechanic.MonoBehaviours
         private SpriteRenderer _spriteRenderer;
 
         private bool _selected;
-        private bool _collided;
         private Camera _camera;
-        
-        private TileElementMonoBehaviour _triggered;
+
+        private TileElementMonoBehaviour _triggeredTileElementMonoBehavior;
 
         public ITileElement TileElement { get; private set; }
 
@@ -23,9 +22,8 @@ namespace MergeMechanic.MonoBehaviours
         {
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            var newSprite = _shapes[0];
-            _spriteRenderer.sprite = newSprite;
-            TileElement = new TileElement(gameObject);
+            _spriteRenderer.sprite = _shapes[0];
+            TileElement = new TileElement(gameObject, new GameObjectWrapper());
         }
 
         private void OnEnable()
@@ -56,34 +54,32 @@ namespace MergeMechanic.MonoBehaviours
         {
             _selected = false;
 
-            gameObject.transform.localPosition = Vector3.zero;
+            TileElement.ResetLocalPosition();
 
-            if (_collided)
+            if (_triggeredTileElementMonoBehavior != null)
             {
-                TileElement.OnMerge(_triggered.TileElement, level => _triggered._spriteRenderer.sprite = _shapes[level]);
+                TileElement.OnMerge(_triggeredTileElementMonoBehavior.TileElement, level => _triggeredTileElementMonoBehavior._spriteRenderer.sprite = _shapes[level]);
             }
         }
 
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (_collided)
+            if (_triggeredTileElementMonoBehavior != null)
             {
                 return;
             }
 
-            var tileElement = collider.gameObject.GetComponent<TileElementMonoBehaviour>();
+            var tileElementMonoBehaviour = collider.gameObject.GetComponent<TileElementMonoBehaviour>();
 
-            if (tileElement != null)
+            if (tileElementMonoBehaviour != null)
             {
-                _triggered = tileElement;
-                _collided = true;
+                _triggeredTileElementMonoBehavior = tileElementMonoBehaviour;
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            _triggered = null;
-            _collided = false;
+            _triggeredTileElementMonoBehavior = null;
         }
     }
 }
