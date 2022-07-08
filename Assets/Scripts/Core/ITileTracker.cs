@@ -2,11 +2,9 @@
 {
     public interface ITileTracker
     {
-        bool HasEmptyTile { get; }
-
         void OnTileCreated(ITile tile);
 
-        ITile GetEmptyTile();
+        ITile? GetEmptyTile();
 
         void MakeTileEmpty(ITile tile);
     }

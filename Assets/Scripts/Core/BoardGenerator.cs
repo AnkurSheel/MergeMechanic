@@ -55,12 +55,16 @@ namespace MergeMechanic.Core
         {
             if (!_tileTracker.HasEmptyTile)
             {
-                Debug.Log("Game Ended!");
-            }
-            else
-            {
                 var tile = _tileTracker.GetEmptyTile();
-                var tileElement = _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.GetTransform());
+
+                if (tile == null)
+                {
+                    Debug.Log("No Available Spaces");
+                }
+                else
+                {
+                    _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.GetTransform());
+                }
             }
         }
     }
