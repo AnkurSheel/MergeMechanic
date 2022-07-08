@@ -15,7 +15,8 @@ namespace MergeMechanic.Core
         //Todo: Get rid of this singleton and use DI instead with an pub/sub model  
         public static IBoardGenerator Instance => _instance ?? (_instance = new BoardGenerator(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance));
 
-        private BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
+        // Needed to be public for tests
+        public BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
         {
             _gridHelper = gridHelper;
             _gameObjectWrapper = gameObjectWrapper;
