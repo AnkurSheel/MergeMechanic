@@ -52,9 +52,9 @@ namespace MergeMechanic.Core
             }
         }
 
-        public void PopulateTile(GameObject gameObjectToGenerate)
+        public void PopulateTile(GameObject gameObjectToGenerate, int amount)
         {
-            if (!_tileTracker.HasEmptyTile)
+            for (var i = 0; i < amount; i++)
             {
                 var tile = _tileTracker.GetEmptyTile();
 
