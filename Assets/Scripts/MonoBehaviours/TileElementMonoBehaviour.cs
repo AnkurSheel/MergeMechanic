@@ -10,13 +10,10 @@ namespace MergeMechanic.MonoBehaviours
         private List<Sprite> _shapes = new List<Sprite>();
 
         private SpriteRenderer _spriteRenderer;
-
         private bool _selected;
         private Camera _camera;
-
         private TileElementMonoBehaviour _triggeredTileElementMonoBehavior;
-
-        public ITileElement TileElement { get; private set; }
+        private ITileElement _tileElement;
 
         private void Awake()
         {
@@ -29,7 +26,7 @@ namespace MergeMechanic.MonoBehaviours
         private void Start()
         {
             var parentTile = GetComponentInParent<TileMonoBehaviour>();
-            TileElement = new TileElement(
+            _tileElement = new TileElement(
                 gameObject,
                 parentTile.Tile,
                 new GameObjectWrapper(),
@@ -54,11 +51,11 @@ namespace MergeMechanic.MonoBehaviours
         {
             _selected = false;
 
-            TileElement.ResetLocalPosition();
+            _tileElement.ResetLocalPosition();
 
             if (_triggeredTileElementMonoBehavior != null)
             {
-                TileElement.OnMerge(_triggeredTileElementMonoBehavior.TileElement, level => _triggeredTileElementMonoBehavior._spriteRenderer.sprite = _shapes[level]);
+                _tileElement.OnMerge(_triggeredTileElementMonoBehavior._tileElement, level => _triggeredTileElementMonoBehavior._spriteRenderer.sprite = _shapes[level]);
             }
         }
 
