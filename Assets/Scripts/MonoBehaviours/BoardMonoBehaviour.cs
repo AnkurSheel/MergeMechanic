@@ -14,14 +14,11 @@ namespace MergeMechanic.MonoBehaviours
         [SerializeField]
         private GameObject _cell;
 
-        [SerializeField]
-        private float _repeatRate = 2.0f;
-
         private IBoardManager _boardManager;
 
         private void Awake()
         {
-            _boardManager = new BoardManager(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance);
+            _boardManager = BoardManager.Instance;
         }
 
         private void Start()
@@ -32,21 +29,7 @@ namespace MergeMechanic.MonoBehaviours
                 _height,
                 spriteSize,
                 transform,
-                _cell,
-                GetTileElement);
-
-            InvokeRepeating(nameof(PopulateTile), 0.0f, _repeatRate);
-        }
-
-        private ITileElement GetTileElement(GameObject tile)
-        {
-            var tileElement = tile.GetComponentInChildren<TileElementMonoBehaviour>();
-            return tileElement.TileElement;
-        }
-
-        public void PopulateTile()
-        {
-            _boardManager.PopulateTile();
+                _cell);
         }
     }
 }

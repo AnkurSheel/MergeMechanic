@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MergeMechanic.Core
 {
@@ -10,7 +9,12 @@ namespace MergeMechanic.Core
         private readonly IGameObjectWrapper _gameObjectWrapper;
         private readonly ITileTracker _tileTracker;
 
-        public BoardManager(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
+        private static IBoardManager? _instance;
+
+        //Todo: Get rid of this singleton and use DI instead with an pub/sub model  
+        public static IBoardManager Instance => _instance ?? (_instance = new BoardManager(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance));
+
+        private BoardManager(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
         {
             _gridHelper = gridHelper;
             _gameObjectWrapper = gameObjectWrapper;
@@ -22,8 +26,7 @@ namespace MergeMechanic.Core
             int height,
             Vector3 tileSize,
             Transform parentTransform,
-            GameObject cell,
-            Func<GameObject, ITileElement> getTileElement)
+            GameObject cell)
         {
             for (var column = 0; column < width; column++)
             {
@@ -41,24 +44,21 @@ namespace MergeMechanic.Core
                         parentTransform,
                         $"Tile_r{row}_c{column}");
 
-                    var tileElement = getTileElement(tile);
-
-                    tileElement.Hide();
-                    _tileTracker.OnTileCreated(tileElement);
+                    _tileTracker.OnTileCreated(tile);
                 }
             }
         }
 
-        public void PopulateTile()
+        public void PopulateTile(GameObject gameObjectToGenerate)
         {
-            if (!TileTracker.Instance.HasEmptyTile)
+            if (!_tileTracker.HasEmptyTile)
             {
                 Debug.Log("Game Ended!");
             }
             else
             {
-                var tileElement = _tileTracker.PopulateRandomTile();
-                tileElement.Show();
+                var tile = _tileTracker.GetEmptyTile();
+                var tileElement = _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.transform);
             }
         }
     }

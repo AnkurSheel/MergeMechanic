@@ -16,6 +16,13 @@ namespace MergeMechanic.Core
             return gameObject;
         }
 
+        public GameObject Instantiate(GameObject gameObjectToInstantiate, Transform parent)
+        {
+            var gameObject = Object.Instantiate(gameObjectToInstantiate, parent.transform.position, Quaternion.identity);
+            gameObject.transform.parent = parent;
+            return gameObject;
+        }
+
         public void SetActive(GameObject gameObject, bool value)
         {
             gameObject.SetActive(value);
@@ -25,5 +32,6 @@ namespace MergeMechanic.Core
         {
             gameObject.transform.localPosition = Vector3.zero;
         }
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MergeMechanic.Core
 {
@@ -10,9 +9,8 @@ namespace MergeMechanic.Core
             int height,
             Vector3 tileSize,
             Transform parentTransform,
-            GameObject cell,
-            Func<GameObject, ITileElement> getTileElement);
+            GameObject cell);
 
-        void PopulateTile();
+        void PopulateTile(GameObject gameObjectToGenerate);
     }
 }

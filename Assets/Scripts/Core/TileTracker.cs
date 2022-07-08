@@ -5,8 +5,8 @@ namespace MergeMechanic.Core
 {
     public class TileTracker : ITileTracker
     {
-        private readonly List<ITileElement> _fullTiles = new List<ITileElement>();
-        private readonly List<ITileElement> _emptyTiles = new List<ITileElement>();
+        private readonly List<GameObject> _fullTiles = new List<GameObject>();
+        private readonly List<GameObject> _emptyTiles = new List<GameObject>();
 
         private static ITileTracker? _instance;
 
@@ -17,34 +17,34 @@ namespace MergeMechanic.Core
 
         public bool HasEmptyTile => _emptyTiles.Count > 0;
 
-        public void OnTileCreated(ITileElement tileElement)
+        public void OnTileCreated(GameObject tile)
         {
-            _emptyTiles.Add(tileElement);
+            _emptyTiles.Add(tile);
         }
 
-        public ITileElement PopulateRandomTile()
+        public GameObject GetEmptyTile()
         {
-            var tileElement = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
+            var tile = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
 
-            _fullTiles.Add(tileElement);
-            _emptyTiles.Remove(tileElement);
+            _fullTiles.Add(tile);
+            _emptyTiles.Remove(tile);
 
-            return tileElement;
+            return tile;
         }
 
         public void OnMerge(ITileElement tileElement)
         {
-            var tile = _fullTiles.Find(x => x == tileElement);
-
-            if (tile != null)
-            {
-                _emptyTiles.Add(tile);
-                _fullTiles.Remove(tile);
-            }
-            else
-            {
-                Debug.LogError("Trying to merge a tile element that was not populated");
-            }
+            // var tile = _fullTiles.Find(x => x == tileElement);
+            //
+            // if (tile != null)
+            // {
+            //     _emptyTiles.Add(tile);
+            //     _fullTiles.Remove(tile);
+            // }
+            // else
+            // {
+            //     Debug.LogError("Trying to merge a tile element that was not populated");
+            // }
         }
     }
 }

@@ -1,12 +1,14 @@
-﻿namespace MergeMechanic.Core
+﻿using UnityEngine;
+
+namespace MergeMechanic.Core
 {
     public interface ITileTracker
     {
         bool HasEmptyTile { get; }
 
-        void OnTileCreated(ITileElement tileElement);
+        void OnTileCreated(GameObject tile);
 
-        ITileElement PopulateRandomTile();
+        GameObject GetEmptyTile();
 
         void OnMerge(ITileElement tileElement);
     }
