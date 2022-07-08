@@ -6,9 +6,11 @@ namespace MergeMechanic.MonoBehaviours
     public class BoardGeneratorBehaviour : MonoBehaviour
     {
         [SerializeField]
+        [Range(0, 9)]
         private int _width = 3;
 
         [SerializeField]
+        [Range(0, 9)]
         private int _height = 3;
 
         [SerializeField]
