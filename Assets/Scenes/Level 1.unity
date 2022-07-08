@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4852217577153532728, guid: bbf6acce88e97084cb6938a1f2fb11d4, type: 3}
+      propertyPath: _width
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4852217577153532729, guid: bbf6acce88e97084cb6938a1f2fb11d4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -461,7 +465,7 @@ GameObject:
   - component: {fileID: 1316765962}
   - component: {fileID: 1316765961}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Generate1CircleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,11 +540,11 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: MergeMechanic.MonoBehaviours.GenerateButtonBehaviour,
           MonoBehaviours
         m_MethodName: OnButtonClick
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
