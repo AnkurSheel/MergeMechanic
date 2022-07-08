@@ -23,7 +23,7 @@ namespace MergeMechanic.MonoBehaviours
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = _shapes[0];
-            TileElement = new TileElement(gameObject, new GameObjectWrapper());
+            TileElement = new TileElement(gameObject, new GameObjectWrapper(), TileTracker.Instance);
         }
 
         private void OnEnable()

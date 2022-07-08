@@ -32,19 +32,19 @@ namespace MergeMechanic.Core
             return tile;
         }
 
-        public void OnMerge(ITileElement tileElement)
+        public void MakeTileEmpty(GameObject tile)
         {
-            // var tile = _fullTiles.Find(x => x == tileElement);
-            //
-            // if (tile != null)
-            // {
-            //     _emptyTiles.Add(tile);
-            //     _fullTiles.Remove(tile);
-            // }
-            // else
-            // {
-            //     Debug.LogError("Trying to merge a tile element that was not populated");
-            // }
+            var tileToRemove = _fullTiles.Find(x => x == tile);
+
+            if (tileToRemove != null)
+            {
+                _emptyTiles.Add(tileToRemove);
+                _fullTiles.Remove(tileToRemove);
+            }
+            else
+            {
+                Debug.LogError("Trying to merge a tile element that was not populated");
+            }
         }
     }
 }

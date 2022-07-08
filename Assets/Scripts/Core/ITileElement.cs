@@ -6,10 +6,6 @@ namespace MergeMechanic.Core
     {
         void OnMerge(ITileElement triggeredTile, Action<int> onMergeFunc);
 
-        void Show();
-
-        void Hide();
-
         int Level { get; }
 
         void IncrementLevel(Action<int> instantiateGameObjectFunc);

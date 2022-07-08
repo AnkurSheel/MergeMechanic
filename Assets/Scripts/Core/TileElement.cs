@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace MergeMechanic.Core
 {
@@ -12,11 +13,13 @@ namespace MergeMechanic.Core
 
         private readonly GameObject _gameObject;
         private readonly IGameObjectWrapper _gameObjectWrapper;
+        private readonly ITileTracker _tileTracker;
 
-        public TileElement(GameObject gameObject, IGameObjectWrapper gameObjectWrapper)
+        public TileElement(GameObject gameObject, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
         {
             _gameObject = gameObject;
             _gameObjectWrapper = gameObjectWrapper;
+            _tileTracker = tileTracker;
             Level = 1;
         }
 
@@ -26,8 +29,8 @@ namespace MergeMechanic.Core
             {
                 triggeredTile.IncrementLevel(onMergeFunc);
                 Level = 1;
-                TileTracker.Instance.OnMerge(this);
-                _gameObjectWrapper.SetActive(_gameObject, false);
+                _tileTracker.MakeTileEmpty(_gameObject.transform.parent.gameObject);
+                Object.Destroy(_gameObject);
             }
         }
 
@@ -40,16 +43,6 @@ namespace MergeMechanic.Core
         public void ResetLocalPosition()
         {
             _gameObjectWrapper.ResetLocalPosition(_gameObject);
-        }
-
-        public void Show()
-        {
-            _gameObjectWrapper.SetActive(_gameObject, true);
-        }
-
-        public void Hide()
-        {
-            _gameObjectWrapper.SetActive(_gameObject, false);
         }
     }
 }

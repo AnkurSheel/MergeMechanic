@@ -10,6 +10,6 @@ namespace MergeMechanic.Core
 
         GameObject GetEmptyTile();
 
-        void OnMerge(ITileElement tileElement);
+        void MakeTileEmpty(GameObject tile);
     }
 }
