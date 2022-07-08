@@ -29,7 +29,14 @@ namespace MergeMechanic.MonoBehaviours
                 _height,
                 spriteSize,
                 transform,
-                _cell);
+                _cell,
+                GetTile);
+        }
+
+        private ITile GetTile(GameObject tile)
+        {
+            var tileElement = tile.GetComponent<TileMonoBehaviour>();
+            return tileElement.Tile;
         }
     }
 }

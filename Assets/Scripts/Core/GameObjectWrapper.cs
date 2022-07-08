@@ -23,15 +23,14 @@ namespace MergeMechanic.Core
             return gameObject;
         }
 
-        public void SetActive(GameObject gameObject, bool value)
+        public void Destroy(GameObject gameObject)
         {
-            gameObject.SetActive(value);
+            Object.Destroy(gameObject);
         }
 
         public void ResetLocalPosition(GameObject gameObject)
         {
             gameObject.transform.localPosition = Vector3.zero;
         }
-
     }
 }

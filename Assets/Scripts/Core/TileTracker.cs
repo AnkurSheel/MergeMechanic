@@ -5,8 +5,8 @@ namespace MergeMechanic.Core
 {
     public class TileTracker : ITileTracker
     {
-        private readonly List<GameObject> _fullTiles = new List<GameObject>();
-        private readonly List<GameObject> _emptyTiles = new List<GameObject>();
+        private readonly List<ITile> _fullTiles = new List<ITile>();
+        private readonly List<ITile> _emptyTiles = new List<ITile>();
 
         private static ITileTracker? _instance;
 
@@ -17,12 +17,12 @@ namespace MergeMechanic.Core
 
         public bool HasEmptyTile => _emptyTiles.Count > 0;
 
-        public void OnTileCreated(GameObject tile)
+        public void OnTileCreated(ITile tile)
         {
             _emptyTiles.Add(tile);
         }
 
-        public GameObject GetEmptyTile()
+        public ITile GetEmptyTile()
         {
             var tile = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
 
@@ -32,7 +32,7 @@ namespace MergeMechanic.Core
             return tile;
         }
 
-        public void MakeTileEmpty(GameObject tile)
+        public void MakeTileEmpty(ITile tile)
         {
             var tileToRemove = _fullTiles.Find(x => x == tile);
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace MergeMechanic.Core
 {
@@ -26,7 +27,8 @@ namespace MergeMechanic.Core
             int height,
             Vector3 tileSize,
             Transform parentTransform,
-            GameObject cell)
+            GameObject cell,
+            Func<GameObject, ITile> getTileFunc)
         {
             for (var column = 0; column < width; column++)
             {
@@ -44,7 +46,7 @@ namespace MergeMechanic.Core
                         parentTransform,
                         $"Tile_r{row}_c{column}");
 
-                    _tileTracker.OnTileCreated(tile);
+                    _tileTracker.OnTileCreated(getTileFunc(tile));
                 }
             }
         }
@@ -58,7 +60,7 @@ namespace MergeMechanic.Core
             else
             {
                 var tile = _tileTracker.GetEmptyTile();
-                var tileElement = _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.transform);
+                var tileElement = _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.GetTransform());
             }
         }
     }

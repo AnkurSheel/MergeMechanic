@@ -1,15 +1,13 @@
-﻿using UnityEngine;
-
-namespace MergeMechanic.Core
+﻿namespace MergeMechanic.Core
 {
     public interface ITileTracker
     {
         bool HasEmptyTile { get; }
 
-        void OnTileCreated(GameObject tile);
+        void OnTileCreated(ITile tile);
 
-        GameObject GetEmptyTile();
+        ITile GetEmptyTile();
 
-        void MakeTileEmpty(GameObject tile);
+        void MakeTileEmpty(ITile tile);
     }
 }

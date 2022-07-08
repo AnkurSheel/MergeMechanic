@@ -12,7 +12,7 @@ namespace MergeMechanic.Core
             Transform parent,
             string name);
 
-        void SetActive(GameObject gameObject, bool value);
+        void Destroy(GameObject gameObject);
 
         void ResetLocalPosition(GameObject gameObject);
     }
