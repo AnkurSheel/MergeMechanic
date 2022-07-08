@@ -35,7 +35,11 @@ namespace MergeMechanic.Core
                         column,
                         row);
 
-                    var tile = _gameObjectWrapper.Instantiate(cell, position, parentTransform);
+                    var tile = _gameObjectWrapper.Instantiate(
+                        cell,
+                        position,
+                        parentTransform,
+                        $"Tile_r{row}_c{column}");
 
                     var tileElement = getTileElement(tile);
 
