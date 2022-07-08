@@ -15,9 +15,9 @@ namespace MergeMechanic.MonoBehaviours
             _boardGenerator = BoardGenerator.Instance;
         }
 
-        public void OnButtonClick()
+        public void OnButtonClick(int amount)
         {
-            _boardGenerator.PopulateTile(_gameObjectToGenerate);
+            _boardGenerator.PopulateTile(_gameObjectToGenerate, amount);
         }
     }
 }

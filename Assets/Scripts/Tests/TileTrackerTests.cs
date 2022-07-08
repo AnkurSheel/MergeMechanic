@@ -20,37 +20,37 @@ namespace MergeMechanic.Tests
         [Test]
         public void If_no_tiles_are_created_it_has_no_empty_tiles()
         {
-            Assert.IsFalse(_tileTracker.HasEmptyTile);
+            Assert.Null(_tileTracker.GetEmptyTile());
         }
 
         [Test]
-        public void If_a_tile_is_created_it_is_added_to_the_empty_collection()
+        public void If_a_tile_is_created_can_get_an_empty_tile()
         {
             _tileTracker.OnTileCreated(Mock.Of<ITile>());
-            Assert.IsTrue(_tileTracker.HasEmptyTile);
+            Assert.NotNull(_tileTracker.GetEmptyTile());
         }
 
         [Test]
-        public void If_a_tile_is_populated_it_is_removed_from_the_empty_collection()
+        public void If_all_tiles_are_populated_cannot_get_an_empty_tile()
         {
             _tileTracker.OnTileCreated(Mock.Of<ITile>());
             _tileTracker.GetEmptyTile();
-            Assert.IsFalse(_tileTracker.HasEmptyTile);
+            Assert.Null(_tileTracker.GetEmptyTile());
         }
 
         [Test]
-        public void If_a_tile_is_merged_it_is_added_to_the_empty_collection()
+        public void If_all_tiles_are_populated_and_a_tile_is_merged_can_get_an_empty_tile()
         {
             var tile = Mock.Of<ITile>();
             _tileTracker.OnTileCreated(tile);
             _tileTracker.GetEmptyTile();
             _tileTracker.MakeTileEmpty(tile);
 
-            Assert.IsTrue(_tileTracker.HasEmptyTile);
+            Assert.NotNull(_tileTracker.GetEmptyTile());
         }
 
         [Test]
-        public void If_a_tile_that_has_not_been_populated_is_merged_it_is_not_added_to_the_empty_collection1()
+        public void If_a_tile_that_has_not_been_populated_is_merged_logs_error()
         {
             var tile = Mock.Of<ITile>();
             _tileTracker.OnTileCreated(tile);
@@ -58,7 +58,7 @@ namespace MergeMechanic.Tests
             _tileTracker.MakeTileEmpty(Mock.Of<ITile>());
             
             LogAssert.Expect(LogType.Error, "Trying to merge a tile element that was not populated");
-            Assert.IsFalse(_tileTracker.HasEmptyTile);
+            Assert.Null(_tileTracker.GetEmptyTile());
         }
     }
 }

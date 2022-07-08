@@ -15,7 +15,8 @@ namespace MergeMechanic.Core
         //Todo: Get rid of this singleton and use DI instead with an pub/sub model  
         public static IBoardGenerator Instance => _instance ?? (_instance = new BoardGenerator(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance));
 
-        private BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
+        // Needed to be public for tests
+        public BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
         {
             _gridHelper = gridHelper;
             _gameObjectWrapper = gameObjectWrapper;
@@ -51,16 +52,20 @@ namespace MergeMechanic.Core
             }
         }
 
-        public void PopulateTile(GameObject gameObjectToGenerate)
+        public void PopulateTile(GameObject gameObjectToGenerate, int amount)
         {
-            if (!_tileTracker.HasEmptyTile)
-            {
-                Debug.Log("Game Ended!");
-            }
-            else
+            for (var i = 0; i < amount; i++)
             {
                 var tile = _tileTracker.GetEmptyTile();
-                var tileElement = _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.GetTransform());
+
+                if (tile == null)
+                {
+                    Debug.Log("No Available Spaces");
+                }
+                else
+                {
+                    _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.GetTransform());
+                }
             }
         }
     }

@@ -13,17 +13,17 @@ namespace MergeMechanic.Core
         //Todo: Get rid of this singleton and use DI instead with an pub/sub model  
         public static ITileTracker Instance => _instance ?? (_instance = new TileTracker());
 
-        // Only needed for tests. Should be private
-
-        public bool HasEmptyTile => _emptyTiles.Count > 0;
-
         public void OnTileCreated(ITile tile)
         {
             _emptyTiles.Add(tile);
         }
 
-        public ITile GetEmptyTile()
+        public ITile? GetEmptyTile()
         {
+            if (_emptyTiles.Count == 0)
+            {
+                return null;
+            }
             var tile = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
 
             _fullTiles.Add(tile);

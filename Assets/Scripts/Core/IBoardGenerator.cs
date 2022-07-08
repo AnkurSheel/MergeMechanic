@@ -13,6 +13,6 @@ namespace MergeMechanic.Core
             GameObject cell,
             Func<GameObject, ITile> getTileFunc);
 
-        void PopulateTile(GameObject gameObjectToGenerate);
+        void PopulateTile(GameObject gameObjectToGenerate, int amount);
     }
 }
