@@ -8,7 +8,7 @@ namespace MergeMechanic.Tests
     [TestFixture]
     public class BoardManagerTests
     {
-        private Mock<ITileElement> _tileElement;
+        private Mock<ITile> _tile;
         private Mock<IGridHelper> _gridHelper;
         private Mock<IGameObjectWrapper> _gameObjectWrapper;
         private IBoardManager _boardManager;
@@ -19,12 +19,12 @@ namespace MergeMechanic.Tests
         [SetUp]
         public void Setup()
         {
-            _tileElement = new Mock<ITileElement>();
+            _tile = new Mock<ITile>();
             _gridHelper = new Mock<IGridHelper>();
             _gameObjectWrapper = new Mock<IGameObjectWrapper>();
             _tileTracker = new Mock<ITileTracker>();
 
-            _boardManager = new BoardManager(_gridHelper.Object, _gameObjectWrapper.Object, _tileTracker.Object);
+            _boardManager = BoardManager.Instance;
 
             _tileSize = new Vector3(10, 10, 0);
 
@@ -48,23 +48,15 @@ namespace MergeMechanic.Tests
                 _tileSize,
                 _parentTransform,
                 cell,
-                tile => _tileElement.Object);
+                tile => _tile.Object);
 
-            _gameObjectWrapper.Verify(x => x.Instantiate(cell, It.IsAny<Vector3>(), It.IsAny<Transform>()), Times.Exactly(6));
-        }
-
-        [Test]
-        public void All_tiles_are_hidden_when_board_is_created()
-        {
-            _boardManager.CreateBoard(
-                2,
-                3,
-                _tileSize,
-                _parentTransform,
-                new GameObject(),
-                tile => _tileElement.Object);
-
-            _tileElement.Verify(x => x.Hide(), Times.Exactly(6));
+            _gameObjectWrapper.Verify(
+                x => x.Instantiate(
+                    cell,
+                    It.IsAny<Vector3>(),
+                    It.IsAny<Transform>(),
+                    It.IsAny<string>()),
+                Times.Exactly(6));
         }
 
         [Test]
@@ -76,7 +68,7 @@ namespace MergeMechanic.Tests
                 _tileSize,
                 _parentTransform,
                 new GameObject(),
-                tile => _tileElement.Object);
+                tile => _tile.Object);
 
             _gridHelper.Verify(
                 x => x.GetTilePosition(
