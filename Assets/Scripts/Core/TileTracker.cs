@@ -5,8 +5,8 @@ namespace MergeMechanic.Core
 {
     public class TileTracker : ITileTracker
     {
-        private readonly List<ITileElement> _fullTiles = new List<ITileElement>();
-        private readonly List<ITileElement> _emptyTiles = new List<ITileElement>();
+        private readonly List<ITile> _fullTiles = new List<ITile>();
+        private readonly List<ITile> _emptyTiles = new List<ITile>();
 
         private static ITileTracker? _instance;
 
@@ -17,29 +17,29 @@ namespace MergeMechanic.Core
 
         public bool HasEmptyTile => _emptyTiles.Count > 0;
 
-        public void OnTileCreated(ITileElement tileElement)
+        public void OnTileCreated(ITile tile)
         {
-            _emptyTiles.Add(tileElement);
+            _emptyTiles.Add(tile);
         }
 
-        public ITileElement PopulateRandomTile()
+        public ITile GetEmptyTile()
         {
-            var tileElement = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
+            var tile = _emptyTiles[Random.Range(0, _emptyTiles.Count)];
 
-            _fullTiles.Add(tileElement);
-            _emptyTiles.Remove(tileElement);
+            _fullTiles.Add(tile);
+            _emptyTiles.Remove(tile);
 
-            return tileElement;
+            return tile;
         }
 
-        public void OnMerge(ITileElement tileElement)
+        public void MakeTileEmpty(ITile tile)
         {
-            var tile = _fullTiles.Find(x => x == tileElement);
+            var tileToRemove = _fullTiles.Find(x => x == tile);
 
-            if (tile != null)
+            if (tileToRemove != null)
             {
-                _emptyTiles.Add(tile);
-                _fullTiles.Remove(tile);
+                _emptyTiles.Add(tileToRemove);
+                _fullTiles.Remove(tileToRemove);
             }
             else
             {

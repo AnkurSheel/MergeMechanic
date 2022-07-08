@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MergeMechanic.Core
 {
-    public interface IBoardManager
+    public interface IBoardGenerator
     {
         void CreateBoard(
             int width,
@@ -11,8 +11,8 @@ namespace MergeMechanic.Core
             Vector3 tileSize,
             Transform parentTransform,
             GameObject cell,
-            Func<GameObject, ITileElement> getTileElement);
+            Func<GameObject, ITile> getTileFunc);
 
-        void PopulateTile();
+        void PopulateTile(GameObject gameObjectToGenerate);
     }
 }

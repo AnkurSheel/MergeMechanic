@@ -4,10 +4,10 @@
     {
         bool HasEmptyTile { get; }
 
-        void OnTileCreated(ITileElement tileElement);
+        void OnTileCreated(ITile tile);
 
-        ITileElement PopulateRandomTile();
+        ITile GetEmptyTile();
 
-        void OnMerge(ITileElement tileElement);
+        void MakeTileEmpty(ITile tile);
     }
 }

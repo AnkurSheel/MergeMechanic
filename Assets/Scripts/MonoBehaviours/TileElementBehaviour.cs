@@ -4,36 +4,33 @@ using UnityEngine;
 
 namespace MergeMechanic.MonoBehaviours
 {
-    public class TileElementMonoBehaviour : MonoBehaviour
+    public class TileElementBehaviour : MonoBehaviour
     {
         [SerializeField]
         private List<Sprite> _shapes = new List<Sprite>();
 
         private SpriteRenderer _spriteRenderer;
-
         private bool _selected;
         private Camera _camera;
-
-        private TileElementMonoBehaviour _triggeredTileElementMonoBehavior;
-
-        public ITileElement TileElement { get; private set; }
+        private TileElementBehaviour _triggeredTileElementBehavior;
+        private ITileElement _tileElement;
 
         private void Awake()
         {
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = _shapes[0];
-            TileElement = new TileElement(gameObject, new GameObjectWrapper());
+            
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            _spriteRenderer.sprite = _shapes[0];
-        }
-
-        private void OnDisable()
-        {
-            _spriteRenderer.sprite = null;
+            var parentTile = GetComponentInParent<TileMonoBehaviour>();
+            _tileElement = new TileElement(
+                gameObject,
+                parentTile.Tile,
+                new GameObjectWrapper(),
+                TileTracker.Instance);
         }
 
         private void Update()
@@ -54,32 +51,32 @@ namespace MergeMechanic.MonoBehaviours
         {
             _selected = false;
 
-            TileElement.ResetLocalPosition();
+            _tileElement.ResetLocalPosition();
 
-            if (_triggeredTileElementMonoBehavior != null)
+            if (_triggeredTileElementBehavior != null)
             {
-                TileElement.OnMerge(_triggeredTileElementMonoBehavior.TileElement, level => _triggeredTileElementMonoBehavior._spriteRenderer.sprite = _shapes[level]);
+                _tileElement.OnMerge(_triggeredTileElementBehavior._tileElement, level => _triggeredTileElementBehavior._spriteRenderer.sprite = _shapes[level]);
             }
         }
 
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (_triggeredTileElementMonoBehavior != null)
+            if (_triggeredTileElementBehavior != null)
             {
                 return;
             }
 
-            var tileElementMonoBehaviour = collider.gameObject.GetComponent<TileElementMonoBehaviour>();
+            var tileElementMonoBehaviour = collider.gameObject.GetComponent<TileElementBehaviour>();
 
             if (tileElementMonoBehaviour != null)
             {
-                _triggeredTileElementMonoBehavior = tileElementMonoBehaviour;
+                _triggeredTileElementBehavior = tileElementMonoBehaviour;
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            _triggeredTileElementMonoBehavior = null;
+            _triggeredTileElementBehavior = null;
         }
     }
 }
