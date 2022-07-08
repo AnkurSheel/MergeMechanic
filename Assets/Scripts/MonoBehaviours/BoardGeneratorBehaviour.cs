@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MergeMechanic.MonoBehaviours
 {
-    public class BoardMonoBehaviour : MonoBehaviour
+    public class BoardGeneratorBehaviour : MonoBehaviour
     {
         [SerializeField]
         private int _width = 3;
@@ -14,17 +14,17 @@ namespace MergeMechanic.MonoBehaviours
         [SerializeField]
         private GameObject _cell;
 
-        private IBoardManager _boardManager;
+        private IBoardGenerator _boardGenerator;
 
         private void Awake()
         {
-            _boardManager = BoardManager.Instance;
+            _boardGenerator = BoardGenerator.Instance;
         }
 
         private void Start()
         {
             var spriteSize = _cell.GetComponent<SpriteRenderer>().bounds.size;
-            _boardManager.CreateBoard(
+            _boardGenerator.CreateBoard(
                 _width,
                 _height,
                 spriteSize,

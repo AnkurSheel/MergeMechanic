@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace MergeMechanic.Core
 {
-    public class BoardManager : IBoardManager
+    public class BoardGenerator : IBoardGenerator
     {
         private readonly IGridHelper _gridHelper;
 
         private readonly IGameObjectWrapper _gameObjectWrapper;
         private readonly ITileTracker _tileTracker;
 
-        private static IBoardManager? _instance;
+        private static IBoardGenerator? _instance;
 
         //Todo: Get rid of this singleton and use DI instead with an pub/sub model  
-        public static IBoardManager Instance => _instance ?? (_instance = new BoardManager(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance));
+        public static IBoardGenerator Instance => _instance ?? (_instance = new BoardGenerator(new GridHelper(), new GameObjectWrapper(), TileTracker.Instance));
 
-        private BoardManager(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
+        private BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
         {
             _gridHelper = gridHelper;
             _gameObjectWrapper = gameObjectWrapper;

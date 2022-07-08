@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MergeMechanic.MonoBehaviours
 {
-    public class TileElementMonoBehaviour : MonoBehaviour
+    public class TileElementBehaviour : MonoBehaviour
     {
         [SerializeField]
         private List<Sprite> _shapes = new List<Sprite>();
@@ -12,7 +12,7 @@ namespace MergeMechanic.MonoBehaviours
         private SpriteRenderer _spriteRenderer;
         private bool _selected;
         private Camera _camera;
-        private TileElementMonoBehaviour _triggeredTileElementMonoBehavior;
+        private TileElementBehaviour _triggeredTileElementBehavior;
         private ITileElement _tileElement;
 
         private void Awake()
@@ -53,30 +53,30 @@ namespace MergeMechanic.MonoBehaviours
 
             _tileElement.ResetLocalPosition();
 
-            if (_triggeredTileElementMonoBehavior != null)
+            if (_triggeredTileElementBehavior != null)
             {
-                _tileElement.OnMerge(_triggeredTileElementMonoBehavior._tileElement, level => _triggeredTileElementMonoBehavior._spriteRenderer.sprite = _shapes[level]);
+                _tileElement.OnMerge(_triggeredTileElementBehavior._tileElement, level => _triggeredTileElementBehavior._spriteRenderer.sprite = _shapes[level]);
             }
         }
 
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (_triggeredTileElementMonoBehavior != null)
+            if (_triggeredTileElementBehavior != null)
             {
                 return;
             }
 
-            var tileElementMonoBehaviour = collider.gameObject.GetComponent<TileElementMonoBehaviour>();
+            var tileElementMonoBehaviour = collider.gameObject.GetComponent<TileElementBehaviour>();
 
             if (tileElementMonoBehaviour != null)
             {
-                _triggeredTileElementMonoBehavior = tileElementMonoBehaviour;
+                _triggeredTileElementBehavior = tileElementMonoBehaviour;
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            _triggeredTileElementMonoBehavior = null;
+            _triggeredTileElementBehavior = null;
         }
     }
 }

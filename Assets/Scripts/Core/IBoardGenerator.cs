@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MergeMechanic.Core
 {
-    public interface IBoardManager
+    public interface IBoardGenerator
     {
         void CreateBoard(
             int width,

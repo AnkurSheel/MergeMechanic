@@ -6,12 +6,12 @@ using UnityEngine;
 namespace MergeMechanic.Tests
 {
     [TestFixture]
-    public class BoardManagerTests
+    public class BoardGeneratorTests
     {
         private Mock<ITile> _tile;
         private Mock<IGridHelper> _gridHelper;
         private Mock<IGameObjectWrapper> _gameObjectWrapper;
-        private IBoardManager _boardManager;
+        private IBoardGenerator _boardGenerator;
         private Transform _parentTransform;
         private Vector3 _tileSize;
         private Mock<ITileTracker> _tileTracker;
@@ -24,7 +24,7 @@ namespace MergeMechanic.Tests
             _gameObjectWrapper = new Mock<IGameObjectWrapper>();
             _tileTracker = new Mock<ITileTracker>();
 
-            _boardManager = BoardManager.Instance;
+            _boardGenerator = BoardGenerator.Instance;
 
             _tileSize = new Vector3(10, 10, 0);
 
@@ -42,7 +42,7 @@ namespace MergeMechanic.Tests
         public void A_tile_is_created_for_each_row_and_column()
         {
             var cell = new GameObject();
-            _boardManager.CreateBoard(
+            _boardGenerator.CreateBoard(
                 2,
                 3,
                 _tileSize,
@@ -62,7 +62,7 @@ namespace MergeMechanic.Tests
         [Test]
         public void All_tiles_are_have_the_correct_position_when_board_is_created()
         {
-            _boardManager.CreateBoard(
+            _boardGenerator.CreateBoard(
                 2,
                 3,
                 _tileSize,

@@ -5,19 +5,19 @@ namespace MergeMechanic.MonoBehaviours
 {
     public class GenerateButtonBehaviour : MonoBehaviour
     {
-        private IBoardManager _boardManager;
+        private IBoardGenerator _boardGenerator;
 
         [SerializeField]
         private GameObject _gameObjectToGenerate;
 
         private void Awake()
         {
-            _boardManager = BoardManager.Instance;
+            _boardGenerator = BoardGenerator.Instance;
         }
 
         public void OnButtonClick()
         {
-            _boardManager.PopulateTile(_gameObjectToGenerate);
+            _boardGenerator.PopulateTile(_gameObjectToGenerate);
         }
     }
 }
