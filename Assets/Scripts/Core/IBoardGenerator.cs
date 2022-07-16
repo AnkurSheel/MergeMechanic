@@ -7,11 +7,9 @@ namespace MergeMechanic.Core
     {
         void CreateBoard(
             int width,
-            int height,
             Vector3 tileSize,
             Transform parentTransform,
-            GameObject cell,
-            Func<GameObject, ITile> getTileFunc);
+            GameObject cell);
 
         void PopulateTile(GameObject gameObjectToGenerate, int amount);
     }

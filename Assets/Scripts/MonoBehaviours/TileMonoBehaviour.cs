@@ -10,6 +10,7 @@ namespace MergeMechanic.MonoBehaviours
         private void Awake()
         {
             Tile = new Tile(gameObject);
+            TileTracker.Instance.OnTileCreated(Tile);
         }
     }
 }

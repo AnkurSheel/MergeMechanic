@@ -25,15 +25,13 @@ namespace MergeMechanic.Core
 
         public void CreateBoard(
             int width,
-            int height,
             Vector3 tileSize,
             Transform parentTransform,
-            GameObject cell,
-            Func<GameObject, ITile> getTileFunc)
+            GameObject cell)
         {
             for (var column = 0; column < width; column++)
             {
-                for (var row = 0; row < height; row++)
+                for (var row = 0; row < width; row++)
                 {
                     var position = _gridHelper.GetTilePosition(
                         parentTransform.position,
@@ -41,13 +39,11 @@ namespace MergeMechanic.Core
                         column,
                         row);
 
-                    var tile = _gameObjectWrapper.Instantiate(
+                    _gameObjectWrapper.Instantiate(
                         cell,
                         position,
                         parentTransform,
                         $"Tile_r{row}_c{column}");
-
-                    _tileTracker.OnTileCreated(getTileFunc(tile));
                 }
             }
         }
