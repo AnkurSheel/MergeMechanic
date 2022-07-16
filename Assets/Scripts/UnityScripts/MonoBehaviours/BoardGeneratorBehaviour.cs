@@ -1,7 +1,7 @@
 ﻿using MergeMechanic.Core;
 using UnityEngine;
 
-namespace MergeMechanic.UnityScripts
+namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
     public class BoardGeneratorBehaviour : MonoBehaviour
     {
