@@ -44,11 +44,9 @@ namespace MergeMechanic.Tests
             var cell = new GameObject();
             _boardGenerator.CreateBoard(
                 2,
-                3,
                 _tileSize,
                 _parentTransform,
-                cell,
-                tile => _tile.Object);
+                cell);
 
             _gameObjectWrapper.Verify(
                 x => x.Instantiate(
@@ -56,7 +54,7 @@ namespace MergeMechanic.Tests
                     It.IsAny<Vector3>(),
                     It.IsAny<Transform>(),
                     It.IsAny<string>()),
-                Times.Exactly(6));
+                Times.Exactly(4));
         }
 
         [Test]
@@ -64,11 +62,9 @@ namespace MergeMechanic.Tests
         {
             _boardGenerator.CreateBoard(
                 2,
-                3,
                 _tileSize,
                 _parentTransform,
-                new GameObject(),
-                tile => _tile.Object);
+                new GameObject());
 
             _gridHelper.Verify(
                 x => x.GetTilePosition(
@@ -76,7 +72,7 @@ namespace MergeMechanic.Tests
                     _tileSize,
                     It.IsAny<int>(),
                     It.IsAny<int>()),
-                Times.Exactly(6));
+                Times.Exactly(4));
         }
     }
 }
