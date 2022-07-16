@@ -72,4 +72,5 @@ crashlytics-build.properties
 /Core.csproj
 /Monobehaviours.csproj
 /Tests.csproj
-*.sln
+/Editor.csproj
+/MergeMechanic.sln

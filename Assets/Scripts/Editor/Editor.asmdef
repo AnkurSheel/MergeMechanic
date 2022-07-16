@@ -1,0 +1,19 @@
+{
+    "name": "Editor",
+    "rootNamespace": "MergeMechanic",
+    "references": [
+        "GUID:099f09948cb8004479ebd8e191e75372",
+        "GUID:2601bee0f3800d64eadd5e5cd11b162d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
