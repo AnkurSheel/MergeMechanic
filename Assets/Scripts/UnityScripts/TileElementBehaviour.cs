@@ -2,7 +2,7 @@
 using MergeMechanic.Core;
 using UnityEngine;
 
-namespace MergeMechanic.MonoBehaviours
+namespace MergeMechanic.UnityScripts
 {
     public class TileElementBehaviour : MonoBehaviour
     {
