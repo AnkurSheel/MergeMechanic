@@ -4,11 +4,11 @@ namespace MergeMechanic.Core
 {
     public interface ITileElement
     {
-        void OnMerge(ITileElement triggeredTile, Action<int> onMergeFunc);
+        void OnMerge(ITileElement triggeredTile, Func<int, bool> onMergeFunc);
 
         int Level { get; }
 
-        void IncrementLevel(Action<int> instantiateGameObjectFunc);
+        bool IncrementLevel(Func<int, bool> instantiateGameObjectFunc);
 
         void ResetLocalPosition();
     }

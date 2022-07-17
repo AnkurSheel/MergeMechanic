@@ -60,7 +60,18 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
 
             if (_triggeredRecipeBehavior != null)
             {
-                _tileElement.OnMerge(_triggeredRecipeBehavior._tileElement, level => _triggeredRecipeBehavior._spriteRenderer.sprite = _recipe.RecipeItems[level].Image);
+                _tileElement.OnMerge(
+                    _triggeredRecipeBehavior._tileElement,
+                    level =>
+                    {
+                        if (level < _recipe.RecipeItems.Count)
+                        {
+                            _triggeredRecipeBehavior._spriteRenderer.sprite = _recipe.RecipeItems[level].Image;
+                            return true;
+                        }
+
+                        return false;
+                    });
             }
         }
 
