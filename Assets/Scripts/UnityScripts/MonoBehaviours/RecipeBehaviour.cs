@@ -1,26 +1,26 @@
 ﻿using System.Collections.Generic;
 using MergeMechanic.Core;
+using MergeMechanic.UnityScripts.ScriptableObject;
 using UnityEngine;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
-    public class TileElementBehaviour : MonoBehaviour
+    public class RecipeBehaviour : MonoBehaviour
     {
         [SerializeField]
-        private List<Sprite> _shapes = new List<Sprite>();
-
+        private Recipe _recipe;
+        
         private SpriteRenderer _spriteRenderer;
         private bool _selected;
         private Camera _camera;
-        private TileElementBehaviour _triggeredTileElementBehavior;
+        private RecipeBehaviour _triggeredRecipeBehavior;
         private ITileElement _tileElement;
 
         private void Awake()
         {
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.sprite = _shapes[0];
-            
+            _spriteRenderer.sprite = _recipe.RecipeItems[0].Image;
         }
 
         private void Start()
@@ -53,30 +53,30 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
 
             _tileElement.ResetLocalPosition();
 
-            if (_triggeredTileElementBehavior != null)
+            if (_triggeredRecipeBehavior != null)
             {
-                _tileElement.OnMerge(_triggeredTileElementBehavior._tileElement, level => _triggeredTileElementBehavior._spriteRenderer.sprite = _shapes[level]);
+                _tileElement.OnMerge(_triggeredRecipeBehavior._tileElement, level => _triggeredRecipeBehavior._spriteRenderer.sprite = _recipe.RecipeItems[level].Image);
             }
         }
 
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (_triggeredTileElementBehavior != null)
+            if (_triggeredRecipeBehavior != null)
             {
                 return;
             }
 
-            var tileElementMonoBehaviour = collider.gameObject.GetComponent<TileElementBehaviour>();
+            var tileElementMonoBehaviour = collider.gameObject.GetComponent<RecipeBehaviour>();
 
             if (tileElementMonoBehaviour != null)
             {
-                _triggeredTileElementBehavior = tileElementMonoBehaviour;
+                _triggeredRecipeBehavior = tileElementMonoBehaviour;
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            _triggeredTileElementBehavior = null;
+            _triggeredRecipeBehavior = null;
         }
     }
 }
