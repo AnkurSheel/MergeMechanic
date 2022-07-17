@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MergeMechanic.Core;
+﻿using MergeMechanic.Core;
 using MergeMechanic.UnityScripts.ScriptableObject;
 using UnityEngine;
 
@@ -9,12 +8,18 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
     {
         [SerializeField]
         private Recipe _recipe;
-        
+
         private SpriteRenderer _spriteRenderer;
         private bool _selected;
         private Camera _camera;
         private RecipeBehaviour _triggeredRecipeBehavior;
         private ITileElement _tileElement;
+        private readonly IBoardGenerator _boardGenerator;
+
+        public RecipeBehaviour()
+        {
+            _boardGenerator = BoardGenerator.Instance;
+        }
 
         private void Awake()
         {
@@ -77,6 +82,11 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private void OnTriggerExit2D(Collider2D other)
         {
             _triggeredRecipeBehavior = null;
+        }
+
+        public void CreateRecipe(int amount)
+        {
+            _boardGenerator.PopulateTile(gameObject, amount);
         }
     }
 }
