@@ -1,0 +1,16 @@
+{
+    "name": "UnityScripts",
+    "rootNamespace": "MergeMechanic",
+    "references": [
+        "GUID:2601bee0f3800d64eadd5e5cd11b162d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
