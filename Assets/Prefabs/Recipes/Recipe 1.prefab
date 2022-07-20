@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6686458064223553310}
   - component: {fileID: 1836200759247165302}
   m_Layer: 0
-  m_Name: TileElement
+  m_Name: Recipe 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,14 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d2c7196fa44cfc8a6d347ce8af9651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shapes:
-  - {fileID: 1452915185, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -1201717103, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -1239714505, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -833048915, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -2034999998, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: -1754865554, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
-  - {fileID: 1178494172, guid: 132b76f1cbf406542b8e6b54140770f7, type: 3}
+  _recipe: {fileID: 11400000, guid: c10eb0252d627804fbbcc98425555486, type: 2}
 --- !u!61 &4418697629289143116
 BoxCollider2D:
   m_ObjectHideFlags: 0

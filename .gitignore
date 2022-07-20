@@ -66,8 +66,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+/MergeMechanic.sln
 /Assembly-CSharp.csproj
 /Core.csproj
-/Monobehaviours.csproj
 /Tests.csproj
-*.sln
+/Editor.csproj
+/UnityScripts.csproj

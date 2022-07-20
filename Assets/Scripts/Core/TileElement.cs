@@ -28,21 +28,31 @@ namespace MergeMechanic.Core
             Level = 1;
         }
 
-        public void OnMerge(ITileElement triggeredTile, Action<int> onMergeFunc)
+        public void OnMerge(ITileElement triggeredTile, Func<int, bool> onMergeFunc)
         {
             if (triggeredTile.Level == Level)
             {
-                triggeredTile.IncrementLevel(onMergeFunc);
-                Level = 1;
-                _tileTracker.MakeTileEmpty(_tile);
-                _gameObjectWrapper.Destroy(_gameObject);
+                var canMerge = triggeredTile.IncrementLevel(onMergeFunc);
+
+                if (canMerge)
+                {
+                    Level = 1;
+                    _tileTracker.MakeTileEmpty(_tile);
+                    _gameObjectWrapper.Destroy(_gameObject);
+                }
             }
         }
 
-        public void IncrementLevel(Action<int> onMergeFunc)
+        public bool IncrementLevel(Func<int, bool> onMergeFunc)
         {
-            onMergeFunc(Level);
-            Level++;
+            var canMerge = onMergeFunc(Level);
+
+            if (canMerge)
+            {
+                Level++;
+            }
+
+            return canMerge;
         }
 
         public void ResetLocalPosition()

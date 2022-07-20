@@ -1,7 +1,7 @@
 ﻿using MergeMechanic.Core;
 using UnityEngine;
 
-namespace MergeMechanic.MonoBehaviours
+namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
     public class TileMonoBehaviour : MonoBehaviour
     {
@@ -10,6 +10,7 @@ namespace MergeMechanic.MonoBehaviours
         private void Awake()
         {
             Tile = new Tile(gameObject);
+            TileTracker.Instance.OnTileCreated(Tile);
         }
     }
 }
