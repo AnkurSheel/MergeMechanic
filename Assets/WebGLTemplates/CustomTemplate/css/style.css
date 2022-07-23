@@ -2,10 +2,7 @@ body {
     text-align: center;
 }
 
-.webgl-content {
-    display: inline-block;
-    width: 100%;
-    position: relative;
+#webgl-content {
 }
 
 .centered {
@@ -17,19 +14,26 @@ body {
 #title {
     text-align: center;
     font-family: sans-serif;
-    margin: 1rem 0 1.25rem 0;
+    margin: 2rem 0;
 }
 
 #unity-container {
-    margin-left: auto;
-    margin-right: auto;
-    z-index: -1;
+    position: relative;
+    width: 100%;
+    padding-bottom: 40%;
+    margin: 1rem 0;
+    border: 10px solid red;
 }
 
 #unity-canvas {
-    width: {{{ WIDTH }}}px;
-    height: {{{ HEIGHT }}}px;
-    background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}}
+    background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}};
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    border: 10px solid green;
 }
 
 #loading-bar {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
   <title>{{{ PRODUCT_NAME }}}</title>
@@ -12,11 +12,11 @@
 </head>
 <body>
 <!-- Unity WebGL will be here -->
-<div class="webgl-content">
+<div id="webgl-content">
   <div class="centered">
     <h2>{{{ PRODUCT_NAME }}}</h2>
     <div id="unity-container">
-      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} ></canvas>
+      <canvas id="unity-canvas"></canvas>
       <div id="loading-bar">
         <div id="progressbar">
           <div id="fill" style="width: 0%;" />
@@ -46,11 +46,11 @@
     companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
   productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
   productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
-  // showBanner: unityShowBanner,
-  // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-  // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+    // showBanner: unityShowBanner,
+    // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+    // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
   };
-  
+
   // Unity Initialization
   createUnityInstance(canvas, config, (progress) => {
     fill.style.width = progress * 100 + "%";
