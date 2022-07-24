@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Shape Shifter</title>
+  <title>{{{ PRODUCT_NAME }}}</title>
   <link rel="stylesheet" href="/TemplateData/style.css" />
-  <script src="Build/Web.loader.js"></script>
+  <script src="Build/{{{ LOADER_FILENAME }}}"></script>
 </head>
 <body>
 <!-- Unity WebGL will be here -->
 <div id="webgl-content">
   <div class="centered">
-    <h2>Shape Shifter</h2>
+    <h2>{{{ PRODUCT_NAME }}}</h2>
     <div id="unity-container">
       <canvas id="unity-canvas"></canvas>
       <div id="loading-bar">
@@ -31,13 +31,21 @@
   const fill = document.getElementById("fill")
   const loadingBar = document.getElementById("loading-bar")
   let config = {
-    dataUrl: buildUrl + "/Web.data.br",
-    frameworkUrl: buildUrl + "/Web.framework.js.br",
-    codeUrl: buildUrl + "/Web.wasm.br",
+    dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+    frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+#if USE_WASM
+    codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+#endif
+#if MEMORY_FILENAME
+    memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
+#endif
+    #if SYMBOLS_FILENAME
+    symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
+#endif
     streamingAssetsUrl: "StreamingAssets",
-    companyName: "Transient Toys",
-  productName: "Shape Shifter",
-  productVersion: "1.0",
+    companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
+  productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
+  productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
     // showBanner: unityShowBanner,
     // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
     // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
