@@ -285,5 +285,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bc60d756f24f5182af5599d07ac197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _repeatRate: 0.2
+  _repeatRate: 2
   _recipe: {fileID: 8528842314196777760, guid: c20ec553d3de39e469a3025e30f7191b, type: 3}
