@@ -16,6 +16,8 @@ public sealed class DependencyHelper
         Debug.Log("In Constructor");
         var serviceCollection = new ServiceCollection();
 
+        serviceCollection.AddSingleton(typeof(IEventPublisher<>), typeof(EventPublisher<>));
+
         serviceCollection.AddSingleton<IBoardGenerator, BoardGenerator>();
         serviceCollection.AddSingleton<IGridHelper, GridHelper>();
         serviceCollection.AddSingleton<IGameObjectWrapper, GameObjectWrapper>();
