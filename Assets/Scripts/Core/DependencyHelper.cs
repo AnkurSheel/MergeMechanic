@@ -17,12 +17,15 @@ public sealed class DependencyHelper
         var serviceCollection = new ServiceCollection();
 
         serviceCollection.AddSingleton(typeof(IEventPublisher<>), typeof(EventPublisher<>));
+        serviceCollection.AddSingleton(typeof(IEventListener<TileMergedEvent>), typeof(TileElement));
 
         serviceCollection.AddSingleton<IBoardGenerator, BoardGenerator>();
         serviceCollection.AddSingleton<IGridHelper, GridHelper>();
         serviceCollection.AddSingleton<IGameObjectWrapper, GameObjectWrapper>();
         serviceCollection.AddSingleton<ITileTracker, TileTracker>();
 
+        serviceCollection.AddTransient<ITileElement, TileElement>();
+        
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
 }

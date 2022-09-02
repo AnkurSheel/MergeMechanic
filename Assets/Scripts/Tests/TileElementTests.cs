@@ -16,7 +16,6 @@ namespace MergeMechanic.Tests
         {
             _gameObjectWrapper = new Mock<IGameObjectWrapper>();
             _tileElement = new TileElement(
-                Mock.Of<ITile>(),
                 _gameObjectWrapper.Object,
                 Mock.Of<ITileTracker>());
         }
