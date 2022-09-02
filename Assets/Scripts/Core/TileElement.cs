@@ -10,25 +10,22 @@ namespace MergeMechanic.Core
 
         public int Level { get; private set; }
 
-        private readonly GameObject _gameObject;
         private readonly ITile _tile;
         private readonly IGameObjectWrapper _gameObjectWrapper;
         private readonly ITileTracker _tileTracker;
 
         public TileElement(
-            GameObject gameObject,
             ITile tile,
             IGameObjectWrapper gameObjectWrapper,
             ITileTracker tileTracker)
         {
-            _gameObject = gameObject;
             _tile = tile;
             _gameObjectWrapper = gameObjectWrapper;
             _tileTracker = tileTracker;
             Level = 1;
         }
 
-        public void OnMerge(ITileElement triggeredTile, Func<int, bool> onMergeFunc)
+        public void OnMerge(ITileElement triggeredTile, GameObject gameObject, Func<int, bool> onMergeFunc)
         {
             if (triggeredTile.Level == Level)
             {
@@ -38,7 +35,7 @@ namespace MergeMechanic.Core
                 {
                     Level = 1;
                     _tileTracker.MakeTileEmpty(_tile);
-                    _gameObjectWrapper.Destroy(_gameObject);
+                    _gameObjectWrapper.Destroy(gameObject);
                 }
             }
         }
@@ -55,9 +52,12 @@ namespace MergeMechanic.Core
             return canMerge;
         }
 
-        public void ResetLocalPosition()
+        public void ResetLocalPosition(GameObject gameObject)
         {
-            _gameObjectWrapper.ResetLocalPosition(_gameObject);
+            _gameObjectWrapper.ResetLocalPosition(gameObject);
         }
+
+        public EventListenerStatus OnEvent(TileMergedEvent input)
+            => EventListenerStatus.Success;
     }
 }

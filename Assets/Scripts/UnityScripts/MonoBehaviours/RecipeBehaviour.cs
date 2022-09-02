@@ -34,7 +34,6 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             var parentTile = GetComponentInParent<TileMonoBehaviour>();
             _tileElement = new TileElement(
-                gameObject,
                 parentTile.Tile,
                 new GameObjectWrapper(),
                 _tileTracker);
@@ -58,12 +57,13 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             _selected = false;
 
-            _tileElement.ResetLocalPosition();
+            _tileElement.ResetLocalPosition(gameObject);
 
             if (_triggeredRecipeBehavior != null)
             {
                 _tileElement.OnMerge(
                     _triggeredRecipeBehavior._tileElement,
+                    gameObject,
                     level =>
                     {
                         if (level < _recipe.RecipeItems.Count)
