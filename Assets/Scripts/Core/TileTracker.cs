@@ -8,7 +8,7 @@ namespace MergeMechanic.Core
         private readonly List<ITile> _fullTiles = new List<ITile>();
         private readonly List<ITile> _emptyTiles = new List<ITile>();
 
-        public void OnTileCreated(ITile tile)
+        public void AddEmptyTile(ITile tile)
         {
             _emptyTiles.Add(tile);
         }

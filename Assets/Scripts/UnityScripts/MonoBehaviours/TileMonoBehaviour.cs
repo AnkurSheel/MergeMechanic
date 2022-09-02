@@ -11,7 +11,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             Tile = new Tile(gameObject);
             var tileTracker = DependencyHelper.GetRequiredService<ITileTracker>();
-            tileTracker.OnTileCreated(Tile);
+            tileTracker.AddEmptyTile(Tile);
         }
     }
 }
