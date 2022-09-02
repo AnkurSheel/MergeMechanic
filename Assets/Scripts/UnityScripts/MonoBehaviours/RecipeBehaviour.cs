@@ -15,10 +15,12 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private RecipeBehaviour _triggeredRecipeBehavior;
         private ITileElement _tileElement;
         private readonly IBoardGenerator _boardGenerator;
+        private readonly ITileTracker _tileTracker;
 
         public RecipeBehaviour()
         {
-            _boardGenerator = BoardGenerator.Instance;
+            _boardGenerator = DependencyHelper.GetRequiredService<IBoardGenerator>();
+            _tileTracker = DependencyHelper.GetRequiredService<ITileTracker>();
         }
 
         private void Awake()
@@ -35,7 +37,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
                 gameObject,
                 parentTile.Tile,
                 new GameObjectWrapper(),
-                TileTracker.Instance);
+                _tileTracker);
         }
 
         private void Update()

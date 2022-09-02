@@ -8,11 +8,6 @@ namespace MergeMechanic.Core
         private readonly List<ITile> _fullTiles = new List<ITile>();
         private readonly List<ITile> _emptyTiles = new List<ITile>();
 
-        private static ITileTracker? _instance;
-
-        //Todo: Get rid of this singleton and use DI instead with an pub/sub model  
-        public static ITileTracker Instance => _instance ?? (_instance = new TileTracker());
-
         public void OnTileCreated(ITile tile)
         {
             _emptyTiles.Add(tile);
