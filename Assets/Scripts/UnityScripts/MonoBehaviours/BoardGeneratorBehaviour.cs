@@ -16,7 +16,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
 
         private void Awake()
         {
-            _boardGenerator = BoardGenerator.Instance;
+            _boardGenerator = DependencyHelper.GetRequiredService<IBoardGenerator>();
         }
 
         private void Start()

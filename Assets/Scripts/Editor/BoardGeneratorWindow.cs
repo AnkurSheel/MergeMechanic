@@ -13,6 +13,7 @@ namespace MergeMechanic.Editor
         private ICameraAdjuster _cameraAdjuster;
         private Camera _camera;
         private Vector3 _spriteSize;
+        private IBoardGenerator _boardGenerator;
 
         [MenuItem("Level Editor/Board/Board Generator", false, 1)]
         private static void Init()
@@ -26,6 +27,7 @@ namespace MergeMechanic.Editor
             _camera = Camera.main;
             _tile = AssetDatabase.LoadAssetAtPath<GameObject>(BasePrefabPath);
             _spriteSize = _tile.GetComponent<SpriteRenderer>().bounds.size;
+            _boardGenerator = DependencyHelper.GetRequiredService<IBoardGenerator>();
         }
 
         public void OnGUI()
@@ -50,7 +52,7 @@ namespace MergeMechanic.Editor
         {
             var board = new GameObject("Board");
 
-            BoardGenerator.Instance.CreateBoard(
+            _boardGenerator.CreateBoard(
                 Width,
                 _spriteSize,
                 board.transform,

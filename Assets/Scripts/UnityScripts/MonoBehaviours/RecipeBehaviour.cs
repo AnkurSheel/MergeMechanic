@@ -15,10 +15,13 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private RecipeBehaviour _triggeredRecipeBehavior;
         private ITileElement _tileElement;
         private readonly IBoardGenerator _boardGenerator;
+        private readonly IEventPublisher<TileMergedEvent> _tileMergedEventPublisher;
+        private ITile _tile;
 
         public RecipeBehaviour()
         {
-            _boardGenerator = BoardGenerator.Instance;
+            _boardGenerator = DependencyHelper.GetRequiredService<IBoardGenerator>();
+            _tileMergedEventPublisher = DependencyHelper.GetRequiredService<IEventPublisher<TileMergedEvent>>();
         }
 
         private void Awake()
@@ -31,11 +34,8 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private void Start()
         {
             var parentTile = GetComponentInParent<TileMonoBehaviour>();
-            _tileElement = new TileElement(
-                gameObject,
-                parentTile.Tile,
-                new GameObjectWrapper(),
-                TileTracker.Instance);
+            _tile = parentTile.Tile;
+            _tileElement = DependencyHelper.GetRequiredService<ITileElement>();
         }
 
         private void Update()
@@ -56,22 +56,26 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             _selected = false;
 
-            _tileElement.ResetLocalPosition();
+            _tileElement.ResetLocalPosition(gameObject);
 
             if (_triggeredRecipeBehavior != null)
             {
-                _tileElement.OnMerge(
-                    _triggeredRecipeBehavior._tileElement,
-                    level =>
-                    {
-                        if (level < _recipe.RecipeItems.Count)
+                _tileMergedEventPublisher.PublishEvent(
+                    new TileMergedEvent(
+                        _tileElement,
+                        _triggeredRecipeBehavior._tileElement,
+                        gameObject,
+                        _tile,
+                        level =>
                         {
-                            _triggeredRecipeBehavior._spriteRenderer.sprite = _recipe.RecipeItems[level].Image;
-                            return true;
-                        }
+                            if (level < _recipe.RecipeItems.Count)
+                            {
+                                _triggeredRecipeBehavior._spriteRenderer.sprite = _recipe.RecipeItems[level].Image;
+                                return true;
+                            }
 
-                        return false;
-                    });
+                            return false;
+                        }));
             }
         }
 
