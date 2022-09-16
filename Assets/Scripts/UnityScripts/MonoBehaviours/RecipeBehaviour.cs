@@ -14,13 +14,13 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private Camera _camera;
         private RecipeBehaviour _triggeredRecipeBehavior;
         private ITileElement _tileElement;
-        private readonly IBoardGenerator _boardGenerator;
+        private readonly ITileTracker _tileTracker;
         private readonly IEventPublisher<TileMergedEvent> _tileMergedEventPublisher;
         private ITile _tile;
 
         public RecipeBehaviour()
         {
-            _boardGenerator = DependencyHelper.GetRequiredService<IBoardGenerator>();
+            _tileTracker = DependencyHelper.GetRequiredService<ITileTracker>();
             _tileMergedEventPublisher = DependencyHelper.GetRequiredService<IEventPublisher<TileMergedEvent>>();
         }
 
@@ -101,7 +101,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
 
         public void CreateRecipe(int amount)
         {
-            _boardGenerator.PopulateTile(gameObject, amount);
+            _tileTracker.PopulateTile(gameObject, amount);
         }
     }
 }

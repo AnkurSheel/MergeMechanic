@@ -14,7 +14,6 @@ namespace MergeMechanic.Tests
         private IBoardGenerator _boardGenerator;
         private Transform _parentTransform;
         private Vector3 _tileSize;
-        private Mock<ITileTracker> _tileTracker;
 
         [SetUp]
         public void Setup()
@@ -22,9 +21,8 @@ namespace MergeMechanic.Tests
             _tile = new Mock<ITile>();
             _gridHelper = new Mock<IGridHelper>();
             _gameObjectWrapper = new Mock<IGameObjectWrapper>();
-            _tileTracker = new Mock<ITileTracker>();
 
-            _boardGenerator = new BoardGenerator(_gridHelper.Object, _gameObjectWrapper.Object, _tileTracker.Object);
+            _boardGenerator = new BoardGenerator(_gridHelper.Object, _gameObjectWrapper.Object);
 
             _tileSize = new Vector3(10, 10, 0);
 

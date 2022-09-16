@@ -10,7 +10,5 @@ namespace MergeMechanic.Core
             Vector3 tileSize,
             Transform parentTransform,
             GameObject cell);
-
-        void PopulateTile(GameObject gameObjectToGenerate, int amount);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MergeMechanic.Core
 {
@@ -8,14 +7,12 @@ namespace MergeMechanic.Core
         private readonly IGridHelper _gridHelper;
 
         private readonly IGameObjectWrapper _gameObjectWrapper;
-        private readonly ITileTracker _tileTracker;
 
         // Needed to be public for tests
-        public BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper, ITileTracker tileTracker)
+        public BoardGenerator(IGridHelper gridHelper, IGameObjectWrapper gameObjectWrapper)
         {
             _gridHelper = gridHelper;
             _gameObjectWrapper = gameObjectWrapper;
-            _tileTracker = tileTracker;
         }
 
         public void CreateBoard(
@@ -39,23 +36,6 @@ namespace MergeMechanic.Core
                         position,
                         parentTransform,
                         $"Tile_r{row}_c{column}");
-                }
-            }
-        }
-
-        public void PopulateTile(GameObject gameObjectToGenerate, int amount)
-        {
-            for (var i = 0; i < amount; i++)
-            {
-                var tile = _tileTracker.GetEmptyTile();
-
-                if (tile == null)
-                {
-                    Debug.Log("No Available Spaces");
-                }
-                else
-                {
-                    _gameObjectWrapper.Instantiate(gameObjectToGenerate, tile.GetTransform());
                 }
             }
         }

@@ -16,14 +16,14 @@ public sealed class DependencyHelper
         Debug.Log("In Constructor");
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddSingleton(typeof(IEventPublisher<>), typeof(EventPublisher<>));
-        serviceCollection.AddSingleton(typeof(IEventListener<TileMergedEvent>), typeof(TileElement));
-
-        serviceCollection.AddSingleton<IBoardGenerator, BoardGenerator>();
-        serviceCollection.AddSingleton<IGridHelper, GridHelper>();
         serviceCollection.AddSingleton<IGameObjectWrapper, GameObjectWrapper>();
         serviceCollection.AddSingleton<ITileTracker, TileTracker>();
 
+        serviceCollection.AddTransient(typeof(IEventPublisher<>), typeof(EventPublisher<>));
+        serviceCollection.AddTransient(typeof(IEventListener<TileMergedEvent>), typeof(TileElement));
+
+        serviceCollection.AddTransient<IBoardGenerator, BoardGenerator>();
+        serviceCollection.AddTransient<IGridHelper, GridHelper>();
         serviceCollection.AddTransient<ITileElement, TileElement>();
         
         _serviceProvider = serviceCollection.BuildServiceProvider();
