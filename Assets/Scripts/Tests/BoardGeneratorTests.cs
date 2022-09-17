@@ -1,4 +1,5 @@
 using MergeMechanic.Core;
+using MergeMechanic.Core.Board;
 using Moq;
 using NUnit.Framework;
 using UnityEngine;
@@ -8,23 +9,19 @@ namespace MergeMechanic.Tests
     [TestFixture]
     public class BoardGeneratorTests
     {
-        private Mock<ITile> _tile;
         private Mock<IGridHelper> _gridHelper;
         private Mock<IGameObjectWrapper> _gameObjectWrapper;
         private IBoardGenerator _boardGenerator;
         private Transform _parentTransform;
         private Vector3 _tileSize;
-        private Mock<ITileTracker> _tileTracker;
 
         [SetUp]
         public void Setup()
         {
-            _tile = new Mock<ITile>();
             _gridHelper = new Mock<IGridHelper>();
             _gameObjectWrapper = new Mock<IGameObjectWrapper>();
-            _tileTracker = new Mock<ITileTracker>();
 
-            _boardGenerator = new BoardGenerator(_gridHelper.Object, _gameObjectWrapper.Object, _tileTracker.Object);
+            _boardGenerator = new BoardGenerator(_gridHelper.Object, _gameObjectWrapper.Object);
 
             _tileSize = new Vector3(10, 10, 0);
 

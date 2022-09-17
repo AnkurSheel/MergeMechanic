@@ -1,11 +1,14 @@
-﻿namespace MergeMechanic.Core
+﻿using MergeMechanic.Core.Models;
+using UnityEngine;
+
+namespace MergeMechanic.Core
 {
     public interface ITileTracker
     {
-        void AddEmptyTile(ITile tile);
+        void AddEmptyTile(Tile tile);
 
-        ITile? GetEmptyTile();
+        void MakeTileEmpty(Tile tile);
 
-        void MakeTileEmpty(ITile tile);
+        bool PopulateTile(GameObject gameObjectToGenerate, int amount);
     }
 }

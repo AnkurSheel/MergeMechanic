@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Models
 {
-    public class Tile : ITile
+    public class Tile
     {
         private readonly GameObject _gameObject;
 

@@ -2,13 +2,13 @@
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
-    public class AutoGenerateRecipeBehavior : MonoBehaviour
+    public class AutoGenerateRecipeMB : MonoBehaviour
     {
         [SerializeField]
         private float _repeatRate = 2.0f;
 
         [SerializeField]
-        private RecipeBehaviour _recipe;
+        private RecipeMB _recipe;
         
         private void Start()
         {

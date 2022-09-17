@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Board
 {
     public interface IBoardGenerator
     {
@@ -10,7 +9,5 @@ namespace MergeMechanic.Core
             Vector3 tileSize,
             Transform parentTransform,
             GameObject cell);
-
-        void PopulateTile(GameObject gameObjectToGenerate, int amount);
     }
 }

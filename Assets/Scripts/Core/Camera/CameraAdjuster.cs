@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Camera
 {
     public class CameraAdjuster : ICameraAdjuster
     {

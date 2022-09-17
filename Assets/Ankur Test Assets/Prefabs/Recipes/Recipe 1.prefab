@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d2c7196fa44cfc8a6d347ce8af9651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _recipe: {fileID: 11400000, guid: c10eb0252d627804fbbcc98425555486, type: 2}
+  _recipeSO: {fileID: 11400000, guid: c10eb0252d627804fbbcc98425555486, type: 2}
 --- !u!61 &4418697629289143116
 BoxCollider2D:
   m_ObjectHideFlags: 0

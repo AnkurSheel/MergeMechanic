@@ -1,4 +1,5 @@
-using MergeMechanic.Core;
+using MergeMechanic.Core.Board;
+using MergeMechanic.Core.Camera;
 using UnityEditor;
 using UnityEngine;
 

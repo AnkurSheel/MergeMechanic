@@ -1,4 +1,4 @@
-﻿using MergeMechanic.Core;
+﻿using MergeMechanic.Core.Board;
 using NUnit.Framework;
 using UnityEngine;
 

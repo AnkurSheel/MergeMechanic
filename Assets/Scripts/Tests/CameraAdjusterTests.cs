@@ -1,4 +1,4 @@
-﻿using MergeMechanic.Core;
+﻿using MergeMechanic.Core.Camera;
 using NUnit.Framework;
 using UnityEngine;
 

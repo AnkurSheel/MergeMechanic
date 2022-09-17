@@ -3,7 +3,7 @@
 namespace MergeMechanic.UnityScripts.ScriptableObject
 {
     [CreateAssetMenu(fileName = "RecipeItem", menuName = "Recipe Item", order = 0)]
-    public class RecipeItem : UnityEngine.ScriptableObject
+    public class RecipeItemSO : UnityEngine.ScriptableObject
     {
         public Sprite Image;
     }

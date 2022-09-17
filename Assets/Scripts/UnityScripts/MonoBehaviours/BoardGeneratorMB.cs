@@ -1,4 +1,4 @@
-﻿using MergeMechanic.Core;
+﻿using MergeMechanic.Core.Board;
 using UnityEngine;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
