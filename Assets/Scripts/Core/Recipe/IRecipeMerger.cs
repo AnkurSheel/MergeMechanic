@@ -1,6 +1,6 @@
 ﻿using MergeMechanic.Core.Models;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Recipe
 {
     public interface IRecipeMerger
     {

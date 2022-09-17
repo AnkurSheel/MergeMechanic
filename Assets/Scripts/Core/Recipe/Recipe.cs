@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Recipe
 {
     public class Recipe : IRecipe
     {

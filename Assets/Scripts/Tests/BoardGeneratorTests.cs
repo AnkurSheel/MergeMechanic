@@ -1,4 +1,5 @@
 using MergeMechanic.Core;
+using MergeMechanic.Core.Board;
 using Moq;
 using NUnit.Framework;
 using UnityEngine;

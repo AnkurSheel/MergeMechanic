@@ -1,5 +1,7 @@
 ﻿using System;
 using MergeMechanic.Core;
+using MergeMechanic.Core.Board;
+using MergeMechanic.Core.Recipe;
 using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
 

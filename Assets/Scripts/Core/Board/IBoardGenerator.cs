@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Board
 {
     public interface IBoardGenerator
     {

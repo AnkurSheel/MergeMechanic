@@ -1,5 +1,6 @@
 ﻿using MergeMechanic.Core;
 using MergeMechanic.Core.Models;
+using MergeMechanic.Core.Recipe;
 using Moq;
 using NUnit.Framework;
 using UnityEngine;

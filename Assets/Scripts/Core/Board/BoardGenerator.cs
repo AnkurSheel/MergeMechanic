@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MergeMechanic.Core
+namespace MergeMechanic.Core.Board
 {
     public class BoardGenerator : IBoardGenerator
     {

@@ -1,4 +1,4 @@
-﻿namespace MergeMechanic.Core
+﻿namespace MergeMechanic.Core.Recipe
 {
     public interface IRecipe
     {
