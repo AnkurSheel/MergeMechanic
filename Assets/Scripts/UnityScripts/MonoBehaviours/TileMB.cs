@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
-    public class TileMonoBehaviour : MonoBehaviour
+    public class TileMB : MonoBehaviour
     {
         public Tile Tile { get; private set; }
 

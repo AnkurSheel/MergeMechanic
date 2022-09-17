@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
-    public class RecipeBehaviour : MonoBehaviour
+    public class RecipeMB : MonoBehaviour
     {
         [SerializeField]
         private RecipeSO _recipeSO;
@@ -14,13 +14,13 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private SpriteRenderer _spriteRenderer;
         private bool _selected;
         private Camera _camera;
-        private RecipeBehaviour _triggeredRecipeBehavior;
+        private RecipeMB _triggeredRecipeBehavior;
         private IRecipe _recipe;
         private readonly ITileTracker _tileTracker;
         private readonly IRecipeMerger _recipeMerger;
         private Tile _tile;
 
-        public RecipeBehaviour()
+        public RecipeMB()
         {
             _tileTracker = DependencyHelper.GetRequiredService<ITileTracker>();
             _recipeMerger = DependencyHelper.GetRequiredService<IRecipeMerger>();
@@ -35,7 +35,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
 
         private void Start()
         {
-            var parentTile = GetComponentInParent<TileMonoBehaviour>();
+            var parentTile = GetComponentInParent<TileMB>();
             _tile = parentTile.Tile;
             _recipe = new Recipe(
                 _recipeSO.GetInstanceID(),
@@ -86,7 +86,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
                 return;
             }
 
-            var tileElementMonoBehaviour = collider.gameObject.GetComponent<RecipeBehaviour>();
+            var tileElementMonoBehaviour = collider.gameObject.GetComponent<RecipeMB>();
 
             if (tileElementMonoBehaviour != null)
             {
