@@ -2,7 +2,8 @@
     "name": "UnityScripts",
     "rootNamespace": "MergeMechanic",
     "references": [
-        "GUID:2601bee0f3800d64eadd5e5cd11b162d"
+        "GUID:2601bee0f3800d64eadd5e5cd11b162d",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

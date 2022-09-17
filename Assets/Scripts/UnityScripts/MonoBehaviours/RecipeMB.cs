@@ -3,10 +3,11 @@ using MergeMechanic.Core.Models;
 using MergeMechanic.Core.Recipe;
 using MergeMechanic.UnityScripts.ScriptableObject;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
-    public class RecipeMB : MonoBehaviour
+    public class RecipeMB : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField]
         private RecipeSO _recipeSO;
@@ -26,14 +27,14 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
             _recipeMerger = DependencyHelper.GetRequiredService<IRecipeMerger>();
         }
 
-        private void Awake()
+        public void Awake()
         {
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = _recipeSO.RecipeItems[0].Image;
         }
 
-        private void Start()
+        public void Start()
         {
             var parentTile = GetComponentInParent<TileMB>();
             _tile = parentTile.Tile;
@@ -44,7 +45,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
                 DependencyHelper.GetRequiredService<IGameObjectWrapper>());
         }
 
-        private void Update()
+        public void Update()
         {
             if (_selected)
             {
@@ -53,12 +54,12 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
             }
         }
 
-        private void OnMouseDown()
+        public void OnPointerDown(PointerEventData eventData)
         {
             _selected = true;
         }
 
-        private void OnMouseUp()
+        public void OnPointerUp(PointerEventData eventData)
         {
             _selected = false;
 
