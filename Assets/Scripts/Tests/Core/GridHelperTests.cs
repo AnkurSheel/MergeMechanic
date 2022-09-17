@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-namespace MergeMechanic.Tests
+namespace MergeMechanic.Tests.Core
 {
     public class GridHelperTests
     {

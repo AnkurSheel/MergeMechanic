@@ -5,7 +5,7 @@ using Moq;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace MergeMechanic.Tests
+namespace MergeMechanic.Tests.Core
 {
     [TestFixture]
     public class RecipeMergerTests

@@ -71,6 +71,6 @@ crashlytics-build.properties
 /MergeMechanic.sln
 /Assembly-CSharp.csproj
 /Core.csproj
-/Tests.csproj
+/Core.Tests.csproj
 /Editor.csproj
 /UnityScripts.csproj

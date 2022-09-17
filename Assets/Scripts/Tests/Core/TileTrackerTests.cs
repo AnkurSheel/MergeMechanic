@@ -5,7 +5,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace MergeMechanic.Tests
+namespace MergeMechanic.Tests.Core
 {
     [TestFixture]
     public class TileTrackerTests
