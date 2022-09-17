@@ -1,11 +1,12 @@
 ﻿using MergeMechanic.Core;
+using MergeMechanic.Core.Models;
 using UnityEngine;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
     public class TileMonoBehaviour : MonoBehaviour
     {
-        public ITile Tile { get; private set; }
+        public Tile Tile { get; private set; }
 
         private void Awake()
         {

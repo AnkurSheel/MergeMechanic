@@ -1,4 +1,5 @@
 ﻿using MergeMechanic.Core;
+using MergeMechanic.Core.Models;
 using MergeMechanic.UnityScripts.ScriptableObject;
 using UnityEngine;
 
@@ -13,15 +14,15 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         private bool _selected;
         private Camera _camera;
         private RecipeBehaviour _triggeredRecipeBehavior;
-        private ITileElement _tileElement;
+        private IRecipe _recipe;
         private readonly ITileTracker _tileTracker;
-        private readonly IEventPublisher<TileMergedEvent> _tileMergedEventPublisher;
-        private ITile _tile;
+        private readonly IRecipeMerger _recipeMerger;
+        private Tile _tile;
 
         public RecipeBehaviour()
         {
             _tileTracker = DependencyHelper.GetRequiredService<ITileTracker>();
-            _tileMergedEventPublisher = DependencyHelper.GetRequiredService<IEventPublisher<TileMergedEvent>>();
+            _recipeMerger = DependencyHelper.GetRequiredService<IRecipeMerger>();
         }
 
         private void Awake()
@@ -35,7 +36,11 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             var parentTile = GetComponentInParent<TileMonoBehaviour>();
             _tile = parentTile.Tile;
-            _tileElement = DependencyHelper.GetRequiredService<ITileElement>();
+            _recipe = new Recipe(
+                _recipeSO.GetInstanceID(),
+                _recipeSO.RecipeItems.Count,
+                gameObject,
+                DependencyHelper.GetRequiredService<IGameObjectWrapper>());
         }
 
         private void Update()
@@ -56,26 +61,20 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             _selected = false;
 
-            _tileElement.ResetLocalPosition(gameObject);
+            _recipe.ResetLocalPosition();
 
             if (_triggeredRecipeBehavior != null)
             {
-                _tileMergedEventPublisher.PublishEvent(
-                    new TileMergedEvent(
-                        _tileElement,
-                        _triggeredRecipeBehavior._tileElement,
-                        gameObject,
-                        _tile,
-                        level =>
-                        {
-                            if (level < _recipeSO.RecipeItems.Count)
-                            {
-                                _triggeredRecipeBehavior._spriteRenderer.sprite = _recipeSO.RecipeItems[level].Image;
-                                return true;
-                            }
+                var triggeredRecipeBehavior = _triggeredRecipeBehavior;
+                var triggeredRecipe = _triggeredRecipeBehavior._recipe;
+                var recipeItems = _recipeSO.RecipeItems;
 
-                            return false;
-                        }));
+                var isMerged = _recipeMerger.OnMerge(_recipe, triggeredRecipe, _tile);
+
+                if (isMerged)
+                {
+                    triggeredRecipeBehavior._spriteRenderer.sprite = recipeItems[triggeredRecipe.CurrentLevel - 1].Image;
+                }
             }
         }
 

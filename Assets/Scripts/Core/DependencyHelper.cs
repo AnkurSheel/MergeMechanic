@@ -20,11 +20,11 @@ public sealed class DependencyHelper
         serviceCollection.AddSingleton<ITileTracker, TileTracker>();
 
         serviceCollection.AddTransient(typeof(IEventPublisher<>), typeof(EventPublisher<>));
-        serviceCollection.AddTransient(typeof(IEventListener<TileMergedEvent>), typeof(TileElement));
+        // serviceCollection.AddTransient(typeof(IEventListener<TileMergedEvent>), typeof(TileMerger));
 
         serviceCollection.AddTransient<IBoardGenerator, BoardGenerator>();
         serviceCollection.AddTransient<IGridHelper, GridHelper>();
-        serviceCollection.AddTransient<ITileElement, TileElement>();
+        serviceCollection.AddTransient<IRecipeMerger, RecipeMerger>();
         
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

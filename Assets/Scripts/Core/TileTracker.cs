@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using MergeMechanic.Core.Models;
 using UnityEngine;
 
 namespace MergeMechanic.Core
 {
     public class TileTracker : ITileTracker
     {
-        private readonly List<ITile> _fullTiles = new List<ITile>();
-        private readonly List<ITile> _emptyTiles = new List<ITile>();
+        private readonly List<Tile> _fullTiles = new List<Tile>();
+        private readonly List<Tile> _emptyTiles = new List<Tile>();
 
         private readonly IGameObjectWrapper _gameObjectWrapper;
 
@@ -15,12 +16,12 @@ namespace MergeMechanic.Core
             _gameObjectWrapper = gameObjectWrapper;
         }
 
-        public void AddEmptyTile(ITile tile)
+        public void AddEmptyTile(Tile tile)
         {
             _emptyTiles.Add(tile);
         }
 
-        public void MakeTileEmpty(ITile tile)
+        public void MakeTileEmpty(Tile tile)
         {
             var tileToRemove = _fullTiles.Find(x => x == tile);
 
@@ -58,7 +59,7 @@ namespace MergeMechanic.Core
             return true;
         }
 
-        private ITile? GetEmptyTile()
+        private Tile? GetEmptyTile()
         {
             if (_emptyTiles.Count == 0)
             {

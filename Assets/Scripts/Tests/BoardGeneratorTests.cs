@@ -8,7 +8,6 @@ namespace MergeMechanic.Tests
     [TestFixture]
     public class BoardGeneratorTests
     {
-        private Mock<ITile> _tile;
         private Mock<IGridHelper> _gridHelper;
         private Mock<IGameObjectWrapper> _gameObjectWrapper;
         private IBoardGenerator _boardGenerator;
@@ -18,7 +17,6 @@ namespace MergeMechanic.Tests
         [SetUp]
         public void Setup()
         {
-            _tile = new Mock<ITile>();
             _gridHelper = new Mock<IGridHelper>();
             _gameObjectWrapper = new Mock<IGameObjectWrapper>();
 

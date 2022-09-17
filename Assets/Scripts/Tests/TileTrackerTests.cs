@@ -1,4 +1,5 @@
 ﻿using MergeMechanic.Core;
+using MergeMechanic.Core.Models;
 using Moq;
 using NUnit.Framework;
 using UnityEngine;
@@ -77,14 +78,14 @@ namespace MergeMechanic.Tests
         private bool PopulateTile(int amount = 1)
             => _tileTracker.PopulateTile(new GameObject(), amount);
 
-        private ITile AddEmptyTile()
+        private Tile AddEmptyTile()
         {
-            var tile = Mock.Of<ITile>();
+            var tile = new Tile(new GameObject());
             _tileTracker.AddEmptyTile(tile);
             return tile;
         }
 
-        private ITile AddPopulatedTile()
+        private Tile AddPopulatedTile()
         {
             var tile = AddEmptyTile();
             PopulateTile();
