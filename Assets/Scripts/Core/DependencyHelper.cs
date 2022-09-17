@@ -8,7 +8,7 @@ public sealed class DependencyHelper
     private static readonly Lazy<DependencyHelper> lazy = new Lazy<DependencyHelper>(() => new DependencyHelper());
     private readonly ServiceProvider _serviceProvider;
 
-    public static T GetRequiredService<T>()
+    public static T GetRequiredService<T>() where T : notnull
         => lazy.Value._serviceProvider.GetRequiredService<T>();
 
     private DependencyHelper()
