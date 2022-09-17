@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MergeMechanic.UnityScripts.MonoBehaviours
 {
-    public class BoardGeneratorBehaviour : MonoBehaviour
+    public class BoardGeneratorMB : MonoBehaviour
     {
         [SerializeField]
         [Range(0, 9)]

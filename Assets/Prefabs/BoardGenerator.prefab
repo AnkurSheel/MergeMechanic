@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4852217577153532729}
   - component: {fileID: 4852217577153532728}
   m_Layer: 0
-  m_Name: BoardGenarator
+  m_Name: BoardGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
