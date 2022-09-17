@@ -7,7 +7,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
     public class RecipeBehaviour : MonoBehaviour
     {
         [SerializeField]
-        private Recipe _recipe;
+        private RecipeSO _recipeSO;
 
         private SpriteRenderer _spriteRenderer;
         private bool _selected;
@@ -28,7 +28,7 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
         {
             _camera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _spriteRenderer.sprite = _recipe.RecipeItems[0].Image;
+            _spriteRenderer.sprite = _recipeSO.RecipeItems[0].Image;
         }
 
         private void Start()
@@ -68,9 +68,9 @@ namespace MergeMechanic.UnityScripts.MonoBehaviours
                         _tile,
                         level =>
                         {
-                            if (level < _recipe.RecipeItems.Count)
+                            if (level < _recipeSO.RecipeItems.Count)
                             {
-                                _triggeredRecipeBehavior._spriteRenderer.sprite = _recipe.RecipeItems[level].Image;
+                                _triggeredRecipeBehavior._spriteRenderer.sprite = _recipeSO.RecipeItems[level].Image;
                                 return true;
                             }
 
